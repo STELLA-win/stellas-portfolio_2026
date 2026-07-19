@@ -153,14 +153,6 @@
       max-height: 100%;
     }
 
-    .deck-controls {
-      position: fixed;
-      left: 50%;
-      bottom: max(18px, env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      z-index: 1000;
-    }
-
     @media print {
       html,
       body {
@@ -202,10 +194,8 @@
         page-break-after: auto;
       }
 
-      .deck-controls,
       .edge-nav,
-      .help-panel,
-      .progress-track {
+      .help-panel {
         display: none !important;
       }
     }
@@ -257,69 +247,6 @@
        NAVIGATION UI
        Kept outside the slide so the original layout stays exact.
        =========================================== */
-    .deck-controls {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding: 8px 12px;
-      color: rgba(255, 255, 255, 0.84);
-      background: rgba(24, 9, 14, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      font: 500 12px/1 var(--ui-font);
-      letter-spacing: 0.08em;
-      opacity: 0;
-      transition: opacity 220ms ease;
-    }
-
-    body:hover .deck-controls,
-    .deck-controls:focus-within {
-      opacity: 1;
-    }
-
-    .control-button {
-      width: 30px;
-      height: 30px;
-      border: 0;
-      border-radius: 50%;
-      color: inherit;
-      background: transparent;
-      cursor: pointer;
-      font: 500 18px/1 var(--display-font);
-      transition: background 180ms ease, color 180ms ease;
-    }
-
-    .control-button:hover,
-    .control-button:focus-visible {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.12);
-      outline: none;
-    }
-
-    .counter {
-      min-width: 58px;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .progress-track {
-      position: fixed;
-      inset: auto 0 0;
-      height: 3px;
-      z-index: 1100;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .progress-bar {
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, #b66b80, #f1d8df);
-      transition: width 420ms var(--ease);
-    }
-
     .edge-nav {
       position: fixed;
       top: 0;
@@ -475,17 +402,6 @@
   <button class="edge-nav prev" id="edgePrev" aria-label="上一页"></button>
   <button class="edge-nav next" id="edgeNext" aria-label="下一页"></button>
 
-  <nav class="deck-controls" aria-label="幻灯片控制">
-    <button class="control-button" id="prevButton" aria-label="上一页">&#8249;</button>
-    <span class="counter" id="counter">01 / 13</span>
-    <button class="control-button" id="nextButton" aria-label="下一页">&#8250;</button>
-    <button class="control-button" id="helpButton" aria-label="操作帮助">?</button>
-  </nav>
-
-  <div class="progress-track" aria-hidden="true">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
   <aside class="help-panel" id="helpPanel" aria-label="操作帮助">
     <strong>Portfolio Navigation</strong>
     <p>方向键 / 空格：翻页</p>
@@ -503,8 +419,6 @@
         this.stage = document.getElementById('deckStage');
         this.slides = [...document.querySelectorAll('.slide')];
         this.currentSlide = this.readHash();
-        this.counter = document.getElementById('counter');
-        this.progressBar = document.getElementById('progressBar');
         this.helpPanel = document.getElementById('helpPanel');
         this.wheelLocked = false;
         this.isAnimating = false;
@@ -555,11 +469,8 @@
       setupControls() {
         const prev = () => this.showSlide(this.currentSlide - 1);
         const next = () => this.showSlide(this.currentSlide + 1);
-        document.getElementById('prevButton').addEventListener('click', prev);
-        document.getElementById('nextButton').addEventListener('click', next);
         document.getElementById('edgePrev').addEventListener('click', prev);
         document.getElementById('edgeNext').addEventListener('click', next);
-        document.getElementById('helpButton').addEventListener('click', () => this.toggleHelp());
       }
 
       setupKeyboardNav() {
@@ -784,10 +695,6 @@
       }
 
       updateChrome(index, updateHash) {
-        const current = String(index + 1).padStart(2, '0');
-        const total = String(this.slides.length).padStart(2, '0');
-        this.counter.textContent = `${current} / ${total}`;
-        this.progressBar.style.width = `${((index + 1) / this.slides.length) * 100}%`;
         document.title = `Stella Dai - Portfolio 2026 (${index + 1}/${this.slides.length})`;
 
         if (updateHash) {
