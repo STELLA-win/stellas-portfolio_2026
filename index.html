@@ -138,21 +138,19 @@
     .slide.leaving { z-index: 2; }
 
     .slide.enter-next {
-      animation: enter-next 540ms var(--ease) both;
-      box-shadow: -30px 0 54px rgba(36, 10, 19, 0.2);
+      animation: enter-next 420ms var(--ease) both;
     }
 
     .slide.leave-next {
-      animation: leave-next 540ms var(--ease) both;
+      animation: leave-next 420ms var(--ease) both;
     }
 
     .slide.enter-prev {
-      animation: enter-prev 540ms var(--ease) both;
-      box-shadow: 30px 0 54px rgba(36, 10, 19, 0.2);
+      animation: enter-prev 420ms var(--ease) both;
     }
 
     .slide.leave-prev {
-      animation: leave-prev 540ms var(--ease) both;
+      animation: leave-prev 420ms var(--ease) both;
     }
 
     @keyframes enter-next {
@@ -182,7 +180,6 @@
 
     .slide.dragging.active {
       z-index: 3;
-      box-shadow: 0 0 58px rgba(36, 10, 19, 0.22);
     }
     .slide.drag-preview { z-index: 2; }
 
@@ -1059,6 +1056,9 @@
     }
 
     .contact-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       min-width: 72px;
       min-height: 42px;
       padding: 0 14px;
@@ -1068,6 +1068,7 @@
       background: rgba(255, 255, 255, 0.06);
       font: 600 11px/1 var(--ui-font);
       letter-spacing: 0.06em;
+      text-decoration: none;
       cursor: pointer;
     }
 
@@ -1424,11 +1425,11 @@
 
       <div class="contact-card">
         <span class="contact-kind">03</span>
-        <div class="contact-card-body">
+        <a class="contact-card-body" href="https://xhslink.cn/m/94EcQ63JtDR" target="_blank" rel="noopener noreferrer">
           <span class="contact-card-label">小红书 · Xiaohongshu</span>
           <span class="contact-card-value">xx_duoluoxi</span>
-        </div>
-        <button class="contact-copy" type="button" data-copy="xx_duoluoxi" aria-label="复制小红书账号">复制</button>
+        </a>
+        <a class="contact-copy" href="https://xhslink.cn/m/94EcQ63JtDR" target="_blank" rel="noopener noreferrer" aria-label="打开小红书主页">打开</a>
       </div>
     </div>
   </section>
@@ -1611,6 +1612,7 @@
         this.currentSlide = this.readHash();
         this.helpPanel = document.getElementById('helpPanel');
         this.isAnimating = false;
+        this.queuedNavigation = null;
         this.stageScale = 1;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.webpSupported = document.createElement('canvas')
@@ -2465,6 +2467,7 @@
 
           this.touch = this.emptyTouchState();
           this.isAnimating = false;
+          this.flushNavigationQueue();
         }, duration + 35);
       }
 
@@ -2485,7 +2488,7 @@
 
           const now = performance.now();
           const direction = Math.sign(delta);
-          const startsNewGesture = now - this.wheel.lastEventAt > 180;
+          const startsNewGesture = now - this.wheel.lastEventAt > 150;
           const changesDirection = this.wheel.direction && direction !== this.wheel.direction;
 
           if (startsNewGesture || changesDirection) {
@@ -2498,20 +2501,40 @@
           if (this.wheel.endTimer) window.clearTimeout(this.wheel.endTimer);
           this.wheel.endTimer = window.setTimeout(() => {
             this.wheel = this.emptyWheelState();
-          }, 180);
+          }, 150);
 
-          if (this.wheel.committed || this.isAnimating) return;
+          if (this.wheel.committed) return;
 
           this.wheel.accumulatedDelta += delta;
           const isDiscreteWheel = event.deltaMode !== WheelEvent.DOM_DELTA_PIXEL
             || Math.abs(delta) >= 48;
-          const threshold = isDiscreteWheel ? 32 : 46;
+          const threshold = isDiscreteWheel ? 32 : 40;
           if (Math.abs(this.wheel.accumulatedDelta) < threshold) return;
 
           this.wheel.committed = true;
           this.wheel.accumulatedDelta = 0;
-          this.showSlide(this.currentSlide + direction);
+          if (this.isAnimating) {
+            this.queueNavigation(direction);
+          } else {
+            this.showSlide(this.currentSlide + direction);
+          }
         }, { passive: false });
+      }
+
+      queueNavigation(direction, updateHash = true) {
+        const normalizedDirection = Math.sign(direction);
+        if (!normalizedDirection) return;
+        this.queuedNavigation = { direction: normalizedDirection, updateHash };
+        this.prefetchForNavigation(this.currentSlide + normalizedDirection, normalizedDirection);
+      }
+
+      flushNavigationQueue() {
+        const queued = this.queuedNavigation;
+        this.queuedNavigation = null;
+        if (!queued) return;
+        window.requestAnimationFrame(() => {
+          this.showSlide(this.currentSlide + queued.direction, queued.updateHash);
+        });
       }
 
       setupHashNav() {
@@ -2527,7 +2550,12 @@
           this.updateChrome(nextIndex, updateHash);
           return;
         }
-        if (this.isAnimating) return;
+        if (this.isAnimating) {
+          this.queueNavigation(nextIndex - this.currentSlide, updateHash);
+          return;
+        }
+        const directionValue = Math.sign(nextIndex - this.currentSlide);
+        this.prefetchForNavigation(nextIndex, directionValue);
         if (!this.isSlideLoaded(nextIndex)) {
           this.isAnimating = true;
           this.ensureSlideLoaded(nextIndex, true).then(() => {
@@ -2541,6 +2569,7 @@
         if (this.reducedMotion) {
           this.renderInstant(nextIndex, updateHash);
           this.prefetchAround(nextIndex);
+          this.flushNavigationQueue();
           return;
         }
 
@@ -2557,14 +2586,15 @@
 
         this.currentSlide = nextIndex;
         this.updateChrome(nextIndex, updateHash);
+        this.prefetchAround(nextIndex);
 
         window.setTimeout(() => {
           this.resetMotion(outgoing, true);
           this.resetMotion(incoming, true);
           incoming.classList.add('active', 'visible');
           this.isAnimating = false;
-          this.prefetchAround(nextIndex);
-        }, 575);
+          this.flushNavigationQueue();
+        }, 455);
       }
 
       renderInstant(index, updateHash = true) {
@@ -2672,13 +2702,22 @@
           .forEach((candidate) => this.ensureSlideLoaded(candidate, false).catch(() => {}));
       }
 
+      prefetchForNavigation(index, direction) {
+        if (index < 0 || index >= this.slides.length) return;
+        this.ensureSlideLoaded(index, true).catch(() => {});
+        const ahead = index + Math.sign(direction);
+        if (ahead >= 0 && ahead < this.slides.length) {
+          this.ensureSlideLoaded(ahead, false).catch(() => {});
+        }
+      }
+
       initializeImages() {
         const loading = document.getElementById('loading');
+        this.prefetchAround(this.currentSlide);
         this.ensureSlideLoaded(this.currentSlide, true)
           .catch(() => {})
           .finally(() => {
             loading.classList.add('done');
-            this.prefetchAround(this.currentSlide);
           });
 
         window.setTimeout(() => loading.classList.add('done'), 3000);
