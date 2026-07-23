@@ -3,12 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Stella’s Portfolio_2026">
+  <meta name="description" content="Stella Dai’s selected works in cultural research, visual storytelling, cultural products and AI interaction.">
   <meta name="theme-color" content="#250b13">
+  <link rel="canonical" href="https://stella-win.github.io/stellas-portfolio_2026/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="assets/slides-webp/1x/slide-01.webp"
+    imagesrcset="assets/slides-webp/1x/slide-01.webp 1920w, assets/slides-webp/2x/slide-01.webp 3840w"
+    imagesizes="100vw" fetchpriority="high">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stella’s Portfolio 2026">
+  <meta property="og:description" content="Culture in Everyday Life · Research, Visual Storytelling, Cultural Products and AI Interaction.">
+  <meta property="og:url" content="https://stella-win.github.io/stellas-portfolio_2026/">
+  <meta property="og:image" content="https://stella-win.github.io/stellas-portfolio_2026/assets/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stella’s Portfolio 2026">
+  <meta name="twitter:description" content="Culture in Everyday Life · Selected works by Stella Dai.">
+  <meta name="twitter:image" content="https://stella-win.github.io/stellas-portfolio_2026/assets/social-preview.png">
   <title>Stella’s Portfolio_2026</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Stella Dai",
+      "alternateName": "戴兰馨",
+      "url": "https://stella-win.github.io/stellas-portfolio_2026/",
+      "description": "A cross-disciplinary creator working across cultural research, visual storytelling, cultural products and AI interaction.",
+      "knowsAbout": ["Cultural Research", "Visual Storytelling", "Cultural Products", "AI Interaction"]
+    }
+  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+SC:wght@400;500&display=swap');
-
     /* ===========================================
        THEME AND PRESENTATION CHROME
        The authored slides remain untouched images.
@@ -19,9 +44,25 @@
       --plum: #7d263f;
       --wine: #3b0d1b;
       --paper: #f5eee8;
-      --ui-font: 'Noto Sans SC', sans-serif;
-      --display-font: 'Cormorant Garamond', serif;
+      --ink: #2d2226;
+      --muted: #81777a;
+      --ui-font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --display-font: Garamond, Georgia, 'Times New Roman', serif;
+      --sans-font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --serif-font: 'Songti SC', SimSun, Georgia, serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
     }
 
     * {
@@ -195,7 +236,9 @@
       }
 
       .edge-nav,
-      .help-panel {
+      .help-panel,
+      .explore-trigger,
+      .portfolio-overlay {
         display: none !important;
       }
     }
@@ -329,6 +372,826 @@
       font: 600 19px/1.2 var(--display-font);
     }
 
+    /* ===========================================
+       PORTFOLIO EXPLORATION LAYER
+       Keeps the authored slide intact while exposing original works.
+       =========================================== */
+    .explore-trigger {
+      position: fixed;
+      top: 18px;
+      z-index: 1100;
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(43, 13, 24, 0.76);
+      box-shadow: 0 8px 28px rgba(18, 4, 9, 0.2);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font: 500 12px/1 var(--ui-font);
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      opacity: 0.68;
+      transition: opacity 180ms ease, transform 220ms var(--ease), background 180ms ease;
+    }
+
+    .explore-trigger:hover,
+    .explore-trigger:focus-visible {
+      opacity: 1;
+      background: rgba(81, 22, 42, 0.92);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .index-trigger { left: 18px; }
+
+    .explore-actions {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .explore-actions .explore-trigger {
+      position: relative;
+      top: auto;
+      right: auto;
+    }
+
+    .gallery-trigger[hidden],
+    .process-trigger[hidden] { display: none; }
+
+    body.overlay-open .explore-trigger {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .portfolio-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1800;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 24% 18%, rgba(125, 38, 63, 0.3), transparent 40%),
+        rgba(20, 6, 11, 0.97);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 240ms ease, visibility 240ms;
+    }
+
+    .portfolio-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .overlay-header {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      top: 25px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .overlay-heading small {
+      display: block;
+      margin-bottom: 5px;
+      color: rgba(245, 238, 232, 0.58);
+      font: 500 11px/1 var(--ui-font);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .overlay-heading h2 {
+      font: 600 clamp(26px, 3vw, 46px)/1 var(--display-font);
+    }
+
+    .overlay-close {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      font: 300 26px/1 var(--ui-font);
+      cursor: pointer;
+    }
+
+    /* ===========================================
+       PROJECT PROCESS DRAWER
+       A reading layer for role, decisions and outcomes.
+       =========================================== */
+    .process-overlay {
+      background: rgba(20, 6, 11, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .process-drawer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      width: min(760px, 58vw);
+      height: 100%;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(116, 40, 60, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 100% 34px;
+      box-shadow: -30px 0 80px rgba(13, 2, 7, 0.32);
+      transform: translateX(104%);
+      transition: transform 480ms var(--ease);
+    }
+
+    .process-overlay.open .process-drawer { transform: translateX(0); }
+
+    .process-drawer-header {
+      position: relative;
+      flex: 0 0 auto;
+      padding: 34px 76px 24px 42px;
+      border-bottom: 1px solid rgba(74, 24, 39, 0.14);
+      background: rgba(252, 250, 247, 0.94);
+    }
+
+    .process-drawer-header::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 7px;
+      height: 100%;
+      background: var(--plum);
+    }
+
+    .process-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font: 600 10px/1 var(--ui-font);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .process-kicker::after {
+      content: '';
+      width: 54px;
+      height: 1px;
+      background: rgba(116, 40, 60, 0.3);
+    }
+
+    .process-title-en {
+      color: var(--wine);
+      font: 600 clamp(32px, 3.4vw, 52px)/0.96 var(--display-font);
+      letter-spacing: -0.025em;
+    }
+
+    .process-title-zh {
+      margin-top: 8px;
+      color: var(--plum);
+      font: 500 19px/1.25 var(--serif-font);
+      letter-spacing: 0.04em;
+    }
+
+    .process-meta {
+      margin-top: 17px;
+      color: var(--muted);
+      font: 600 10px/1.4 var(--ui-font);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .process-close {
+      position: absolute;
+      top: 26px;
+      right: 26px;
+      width: 40px;
+      height: 40px;
+      border-color: rgba(74, 24, 39, 0.2);
+      color: var(--wine);
+      background: rgba(116, 40, 60, 0.04);
+    }
+
+    .process-tabs {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 6px;
+      padding: 12px 42px;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(74, 24, 39, 0.12);
+      background: rgba(246, 241, 236, 0.96);
+      scrollbar-width: none;
+    }
+
+    .process-tabs::-webkit-scrollbar { display: none; }
+    .process-tabs[hidden] { display: none; }
+
+    .process-tab {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid rgba(116, 40, 60, 0.18);
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      font: 600 10px/1 var(--ui-font);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+
+    .process-tab.current,
+    .process-tab:hover,
+    .process-tab:focus-visible {
+      border-color: var(--plum);
+      color: var(--paper);
+      background: var(--plum);
+      outline: none;
+    }
+
+    .process-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 26px 42px 48px;
+      scrollbar-color: rgba(116, 40, 60, 0.34) transparent;
+      scrollbar-width: thin;
+    }
+
+    .process-body::-webkit-scrollbar { width: 6px; }
+    .process-body::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(116, 40, 60, 0.34);
+    }
+
+    .process-scope {
+      margin-bottom: 26px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--plum);
+      color: var(--wine);
+      background: rgba(116, 40, 60, 0.055);
+      font: 600 12px/1.55 var(--ui-font);
+      letter-spacing: 0.025em;
+    }
+
+    .process-scope strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .process-section {
+      display: grid;
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 18px;
+      padding: 21px 0;
+      border-top: 1px solid rgba(74, 24, 39, 0.12);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .process-overlay.open .process-section {
+      animation: processReveal 440ms var(--ease) forwards;
+    }
+
+    .process-overlay.open .process-section:nth-of-type(2) { animation-delay: 45ms; }
+    .process-overlay.open .process-section:nth-of-type(3) { animation-delay: 90ms; }
+    .process-overlay.open .process-section:nth-of-type(4) { animation-delay: 135ms; }
+    .process-overlay.open .process-section:nth-of-type(5) { animation-delay: 180ms; }
+
+    @keyframes processReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .process-label {
+      color: var(--plum);
+      font: 700 10px/1.35 var(--ui-font);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .process-label span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: none;
+    }
+
+    .process-copy {
+      color: #3d3034;
+      font: 400 14px/1.8 var(--sans-font);
+    }
+
+    .process-action-list {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+    }
+
+    .process-action-list li {
+      position: relative;
+      padding-left: 17px;
+    }
+
+    .process-action-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--plum);
+    }
+
+    .process-turning-point {
+      padding: 16px 18px;
+      color: var(--wine);
+      background: rgba(116, 40, 60, 0.065);
+      font-family: var(--serif-font);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .process-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .process-point {
+      padding: 7px 10px;
+      border: 1px solid rgba(116, 40, 60, 0.2);
+      border-radius: 999px;
+      color: var(--plum);
+      background: rgba(255, 255, 255, 0.48);
+      font: 600 10px/1 var(--ui-font);
+    }
+
+    .overview-grid {
+      position: absolute;
+      inset: 104px 34px 30px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      overflow-y: auto;
+      padding: 2px 6px 12px 2px;
+      scrollbar-color: rgba(199, 154, 163, 0.55) transparent;
+      scrollbar-width: thin;
+    }
+
+    .overview-grid::-webkit-scrollbar,
+    .gallery-thumbnails::-webkit-scrollbar { width: 6px; }
+
+    .overview-grid::-webkit-scrollbar-thumb,
+    .gallery-thumbnails::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(199, 154, 163, 0.48);
+    }
+
+    .overview-item {
+      position: relative;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: inherit;
+      background: rgba(255, 255, 255, 0.035);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 180ms ease, transform 220ms var(--ease), background 180ms ease;
+    }
+
+    .overview-item:hover,
+    .overview-item:focus-visible,
+    .overview-item.current {
+      border-color: rgba(199, 154, 163, 0.7);
+      background: rgba(125, 38, 63, 0.16);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .overview-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #2b1019;
+    }
+
+    .overview-caption {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 10px 12px 12px;
+      font: 500 12px/1.3 var(--ui-font);
+    }
+
+    .overview-caption span:first-child {
+      color: rgba(245, 238, 232, 0.48);
+      font-family: var(--display-font);
+    }
+
+    .gallery-layout {
+      position: absolute;
+      inset: 96px 34px 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 224px;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .gallery-stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+      cursor: zoom-in;
+      touch-action: none;
+      overscroll-behavior: contain;
+    }
+
+    .gallery-stage.zoomed { cursor: grab; }
+    .gallery-stage.dragging { cursor: grabbing; }
+
+    .gallery-stage.interacting .gallery-main-image {
+      transition: opacity 160ms ease;
+    }
+
+    .gallery-main-image {
+      display: block;
+      max-width: 92%;
+      max-height: 88%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      opacity: 1;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      transform-origin: center;
+      will-change: transform;
+      transition: opacity 160ms ease, transform 280ms var(--ease);
+    }
+
+    .gallery-stage.loading .gallery-main-image {
+      opacity: 0.25;
+    }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 48px;
+      height: 64px;
+      border: 0;
+      color: rgba(255, 255, 255, 0.86);
+      background: rgba(35, 8, 17, 0.56);
+      font: 500 32px/1 var(--display-font);
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .gallery-arrow.prev { left: 10px; }
+    .gallery-arrow.next { right: 10px; }
+
+    .gallery-counter {
+      position: absolute;
+      left: 18px;
+      bottom: 14px;
+      color: rgba(255, 255, 255, 0.68);
+      font: 500 11px/1 var(--ui-font);
+      letter-spacing: 0.13em;
+    }
+
+    .gallery-zoom-hint {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      z-index: 3;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.58);
+      background: rgba(35, 8, 17, 0.48);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font: 500 10px/1 var(--ui-font);
+      letter-spacing: 0.06em;
+      pointer-events: none;
+      transform: translateX(-50%);
+      transition: opacity 180ms ease;
+    }
+
+    .gallery-stage.zoomed .gallery-zoom-hint { opacity: 0; }
+
+    .gallery-zoom-controls {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(35, 8, 17, 0.68);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .gallery-zoom-button,
+    .gallery-zoom-readout {
+      height: 34px;
+      border: 0;
+      color: rgba(255, 255, 255, 0.88);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .gallery-zoom-button {
+      width: 36px;
+      font: 400 20px/1 var(--ui-font);
+    }
+
+    .gallery-zoom-readout {
+      min-width: 58px;
+      padding: 0 8px;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      font: 500 10px/1 var(--ui-font);
+      letter-spacing: 0.05em;
+    }
+
+    .gallery-zoom-button:hover,
+    .gallery-zoom-button:focus-visible,
+    .gallery-zoom-readout:hover,
+    .gallery-zoom-readout:focus-visible {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+      outline: none;
+    }
+
+    .gallery-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      gap: 8px;
+      overflow-y: auto;
+      min-height: 0;
+      padding-right: 5px;
+    }
+
+    .gallery-thumb {
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      opacity: 0.56;
+      transition: opacity 160ms ease, border-color 160ms ease;
+    }
+
+    .gallery-thumb:hover,
+    .gallery-thumb:focus-visible,
+    .gallery-thumb.current {
+      border-color: rgba(199, 154, 163, 0.82);
+      opacity: 1;
+      outline: none;
+    }
+
+    .gallery-thumb img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+    }
+
+    /* ===========================================
+       CONTACT AND FIRST-VISIT GUIDANCE
+       Conversion controls outside the fixed slide stage.
+       =========================================== */
+    .contact-short { display: none; }
+
+    .contact-overlay {
+      background:
+        radial-gradient(circle at 72% 20%, rgba(125, 38, 63, 0.34), transparent 42%),
+        rgba(20, 6, 11, 0.97);
+    }
+
+    .contact-panel {
+      position: absolute;
+      inset: 112px 34px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: min(620px, calc(100% - 68px));
+      margin: 0 auto;
+      overflow-y: auto;
+    }
+
+    .contact-intro {
+      margin: 0 0 12px;
+      color: rgba(245, 238, 232, 0.68);
+      font: 400 14px/1.7 var(--ui-font);
+      letter-spacing: 0.02em;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr) auto;
+      align-items: center;
+      min-height: 86px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.04);
+      transition: border-color 180ms ease, background 180ms ease, transform 220ms var(--ease);
+    }
+
+    .contact-card:hover,
+    .contact-card:focus-within {
+      border-color: rgba(199, 154, 163, 0.68);
+      background: rgba(125, 38, 63, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .contact-kind {
+      color: var(--dusty, #c79aa3);
+      font: 600 11px/1 var(--ui-font);
+      letter-spacing: 0.13em;
+    }
+
+    .contact-card-body {
+      min-width: 0;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-card-label {
+      display: block;
+      color: rgba(245, 238, 232, 0.52);
+      font: 600 10px/1 var(--ui-font);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .contact-card-value {
+      display: block;
+      margin-top: 7px;
+      color: var(--paper);
+      font: 500 15px/1.35 var(--ui-font);
+      word-break: break-all;
+    }
+
+    .contact-copy {
+      min-width: 72px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.06);
+      font: 600 11px/1 var(--ui-font);
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .contact-copy:hover,
+    .contact-copy:focus-visible {
+      border-color: rgba(199, 154, 163, 0.74);
+      background: rgba(125, 38, 63, 0.3);
+      outline: none;
+    }
+
+    .contact-copy.copied {
+      border-color: rgba(178, 217, 184, 0.68);
+      color: #c9eccf;
+      background: rgba(61, 116, 76, 0.26);
+    }
+
+    .contact-hotspot {
+      left: 112px;
+      top: 812px;
+      width: 520px;
+      height: 250px;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .wechat-correction {
+      position: absolute;
+      left: 245px;
+      top: 944px;
+      z-index: 4;
+      width: 190px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      color: #f6f1ec;
+      background: #2b0d18;
+      font: 400 21px/1 "Times New Roman", Georgia, serif;
+      pointer-events: none;
+    }
+
+    .first-visit-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 1120;
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(43, 13, 24, 0.84);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font: 500 11px/1 var(--ui-font);
+      letter-spacing: 0.06em;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 10px);
+      transition: opacity 240ms ease, visibility 240ms, transform 320ms var(--ease);
+      pointer-events: none;
+    }
+
+    .first-visit-hint.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 720px) {
+      .explore-trigger {
+        top: max(10px, env(safe-area-inset-top));
+        min-height: 34px;
+        padding: 0 11px;
+        font-size: 10px;
+      }
+
+      .index-trigger { left: 10px; }
+      .explore-actions { top: max(10px, env(safe-area-inset-top)); right: 10px; gap: 5px; }
+      .explore-actions .explore-trigger { padding: 0 9px; }
+      .contact-label { display: none; }
+      .contact-short { display: inline; font-size: 14px; }
+      .contact-trigger { width: 34px; min-width: 34px; padding: 0 !important; }
+      .overlay-header { left: 18px; right: 18px; top: 16px; }
+      .overview-grid {
+        inset: 86px 16px 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .gallery-layout {
+        inset: 82px 14px 16px;
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-thumbnails { display: none; }
+      .gallery-main-image { max-width: 94%; max-height: 90%; }
+      .gallery-zoom-hint {
+        top: 10px;
+        max-width: calc(100% - 120px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .gallery-zoom-controls { right: 10px; bottom: 10px; }
+
+      .process-drawer { width: 100%; }
+      .process-drawer-header { padding: 28px 64px 20px 24px; }
+      .process-title-en { font-size: clamp(30px, 10vw, 42px); }
+      .process-title-zh { font-size: 17px; }
+      .process-close { top: 20px; right: 18px; }
+      .process-tabs { padding: 10px 24px; }
+      .process-body { padding: 20px 24px 42px; }
+      .process-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 18px 0;
+      }
+      .process-label span { display: inline; margin: 0 0 0 7px; }
+      .contact-panel { inset: 92px 16px 18px; width: calc(100% - 32px); }
+      .contact-card { grid-template-columns: 54px minmax(0, 1fr) auto; min-height: 78px; padding: 12px; }
+      .contact-copy { min-width: 64px; min-height: 44px; }
+      .first-visit-hint { bottom: max(12px, env(safe-area-inset-bottom)); font-size: 10px; }
+    }
+
     .loading {
       position: fixed;
       inset: 0;
@@ -355,46 +1218,61 @@
     <main class="deck-stage" id="deckStage" aria-label="Stella Dai 作品集">
       <section class="slide active" aria-label="封面">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-01.webp" data-high="assets/slides-webp/2x/slide-01.webp" data-fallback="assets/slides/slide-01.png" alt="Stella's Portfolio 封面" draggable="false" decoding="async">
+        <div class="sr-only"><h1>Stella’s Portfolio 2026</h1><p>Culture in Everyday Life. Selected works in research, visual storytelling, cultural products and AI interaction.</p></div>
       </section>
       <section class="slide" aria-label="个人介绍">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-02.webp" data-high="assets/slides-webp/2x/slide-02.webp" data-fallback="assets/slides/slide-02.png" alt="About Stella Dai" draggable="false" decoding="async">
+        <div class="sr-only"><h2>About Stella Dai｜关于我</h2><p>跨越语言、市场与影像的复合背景，关注文化如何被研究、讲述并转化为可感知的作品。</p></div>
       </section>
       <section class="slide" aria-label="创意项目 风颂牧影">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-03.webp" data-high="assets/slides-webp/2x/slide-03.webp" data-fallback="assets/slides/slide-03.png" alt="Fengsong Muying 风颂牧影" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Fengsong Muying｜风颂牧影</h2><p>以草原生活、蒙药香传统与地方记忆建立香型叙事、品牌定位、产品体系与视觉方案。</p></div>
       </section>
       <section class="slide" aria-label="创作作品">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-04.webp" data-high="assets/slides-webp/2x/slide-04.webp" data-fallback="assets/slides/slide-04.png" alt="关于创作" draggable="false" decoding="async">
+        <div class="sr-only"><h2>The Axis Reflecting China｜中轴映华夏</h2><p>围绕北京中轴线完成叙事结构、脚本分镜、双语字幕与影像表达，作品获北京赛区银奖。</p></div>
         <a class="interactive-hotspot video-link-label" href="https://www.bilibili.com/video/BV12eapzgEvK/" target="_blank" rel="noopener" aria-label="在 B 站观看中轴映华夏视频"></a>
         <a class="interactive-hotspot video-link-frame" href="https://www.bilibili.com/video/BV12eapzgEvK/" target="_blank" rel="noopener" aria-label="播放中轴映华夏视频"></a>
       </section>
       <section class="slide" aria-label="新媒体实践">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-05.webp" data-high="assets/slides-webp/2x/slide-05.webp" data-fallback="assets/slides/slide-05.png" alt="关于新媒体" draggable="false" decoding="async">
+        <div class="sr-only"><h2>When Images Become Public Narratives｜当影像成为公共叙事</h2><p>校园媒体摄影、内容策划与图片编辑实践，覆盖微信公众号、微博和新闻网等公共传播场景。</p></div>
       </section>
       <section class="slide" aria-label="策展项目 在场">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-06.webp" data-high="assets/slides-webp/2x/slide-06.webp" data-fallback="assets/slides/slide-06.png" alt="关于策展 在场" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Present｜在场</h2><p>将摄影档案重组为日常、城市、山野、味觉、事件与校园动物六个观看单元。</p></div>
       </section>
       <section class="slide" aria-label="摄影 静物与食物">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-07.webp" data-high="assets/slides-webp/2x/slide-07.webp" data-fallback="assets/slides/slide-07.png" alt="关于摄影 Before the First Bite" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Before the First Bite｜食物入口之前</h2><p>从食物造型与日常餐桌两组影像出发，观察光线、器皿、质感与味觉记忆的关系。</p></div>
       </section>
       <section class="slide" aria-label="摄影 纪实与现场">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-08.webp" data-high="assets/slides-webp/2x/slide-08.webp" data-fallback="assets/slides/slide-08.png" alt="关于摄影 Being Present" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Being Present｜此刻，正在发生</h2><p>运动会、文化节与舞台活动中的纪实摄影，连接人物瞬间、现场关系与共同记忆。</p></div>
       </section>
       <section class="slide" aria-label="摄影 人像">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-09.webp" data-high="assets/slides-webp/2x/slide-09.webp" data-fallback="assets/slides/slide-09.png" alt="关于摄影 Before We Are Defined" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Before We Are Defined｜在被定义之前</h2><p>通过人物设定、服装道具、模特沟通与摄影，探索身份尚未固定时的多重可能。</p></div>
       </section>
       <section class="slide" aria-label="文创 校园产品">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-10.webp" data-high="assets/slides-webp/2x/slide-10.webp" data-fallback="assets/slides/slide-10.png" alt="关于文创 Campus, Made Tangible" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Campus, Made Tangible｜可被携带的校园</h2><p>通过产品场景策划与摄影，让台历、托特包、书签和徽章进入真实校园生活。</p></div>
       </section>
       <section class="slide" aria-label="文创 视觉设计">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-11.webp" data-high="assets/slides-webp/2x/slide-11.webp" data-fallback="assets/slides/slide-11.png" alt="关于文创 Stories to Keep" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Stories to Keep｜值得留下的故事</h2><p>校园猫文创与雷锋主题明信片设计，将校园记忆、档案阅读与日常使用连接起来。</p></div>
       </section>
       <section class="slide" aria-label="人工智能交互设计">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-12.webp" data-high="assets/slides-webp/2x/slide-12.webp" data-fallback="assets/slides/slide-12.png" alt="关于 AI AI-Native Interactive Design" draggable="false" decoding="async">
+        <div class="sr-only"><h2>Cut Away the Bad Luck｜切霉豆腐</h2><p>从语言双关到移动端互动原型，以倒计时、滑动切除、实时计数和结果反馈构成数字仪式。</p></div>
         <a class="interactive-hotspot game-link-label" href="https://service-453083130386.us-west2.run.app/" target="_blank" rel="noopener" aria-label="打开切霉豆腐 AI 互动游戏"></a>
         <a class="interactive-hotspot game-link-qr" href="https://service-453083130386.us-west2.run.app/" target="_blank" rel="noopener" aria-label="扫描或点击体验切霉豆腐 AI 互动游戏"></a>
       </section>
       <section class="slide" aria-label="结尾">
         <img class="page-image" data-low="assets/slides-webp/1x/slide-13.webp" data-high="assets/slides-webp/2x/slide-13.webp" data-fallback="assets/slides/slide-13.png" alt="Selected works are also selected ways of seeing" draggable="false" decoding="async">
+        <span class="wechat-correction" aria-hidden="true">UrWaterProoff</span>
+        <div class="sr-only"><h2>Contact Stella Dai｜联系戴兰馨</h2><p>Email: stelladai096@163.com. WeChat: UrWaterProoff. Xiaohongshu: xx_duoluoxi.</p></div>
+        <button class="interactive-hotspot contact-hotspot" id="endContactHotspot" type="button" aria-label="打开 Stella 的联系方式"></button>
       </section>
     </main>
   </div>
@@ -406,11 +1284,323 @@
     <strong>Portfolio Navigation</strong>
     <p>方向键 / 空格：翻页</p>
     <p>Home / End：首尾页</p>
-    <p>鼠标滚轮或手机左右滑动：翻页</p>
+    <p>鼠标滚轮 / 触控板 / 手机滑动：翻页</p>
+    <p>M：作品目录　G：查看作品　P：查看过程</p>
+    <p>C：联系方式</p>
     <p>按 H：显示或隐藏本说明</p>
   </aside>
 
+  <button class="explore-trigger index-trigger" id="indexTrigger" type="button" aria-label="打开作品目录">
+    目录 · INDEX
+  </button>
+  <div class="explore-actions">
+    <button class="explore-trigger contact-trigger" id="contactTrigger" type="button" aria-label="查看联系方式">
+      <span class="contact-label">联系 · CONTACT</span><span class="contact-short" aria-hidden="true">@</span>
+    </button>
+    <button class="explore-trigger process-trigger" id="processTrigger" type="button" aria-label="查看本页项目过程" hidden>
+      查看过程 · PROCESS
+    </button>
+    <button class="explore-trigger gallery-trigger" id="galleryTrigger" type="button" aria-label="查看本页高清作品" hidden>
+      查看作品
+    </button>
+  </div>
+
+  <div class="first-visit-hint" id="firstVisitHint" role="status">
+    滚动 / 滑动翻页 · M 打开目录 · P 查看过程
+  </div>
+
+  <section class="portfolio-overlay" id="overviewOverlay" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+    <header class="overlay-header">
+      <div class="overlay-heading">
+        <small>Selected Works</small>
+        <h2 id="overviewTitle">作品目录</h2>
+      </div>
+      <button class="overlay-close" type="button" data-close-overlay aria-label="关闭作品目录">×</button>
+    </header>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </section>
+
+  <section class="portfolio-overlay" id="galleryOverlay" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
+    <header class="overlay-header">
+      <div class="overlay-heading">
+        <small id="galleryKicker">Original Works</small>
+        <h2 id="galleryTitle">高清作品</h2>
+      </div>
+      <button class="overlay-close" type="button" data-close-overlay aria-label="关闭高清作品">×</button>
+    </header>
+    <div class="gallery-layout">
+      <div class="gallery-stage" id="galleryStage">
+        <img class="gallery-main-image" id="galleryMainImage" alt="" decoding="async">
+        <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="上一件作品">‹</button>
+        <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="下一件作品">›</button>
+        <span class="gallery-zoom-hint">50%–500% 缩放 · 放大后拖拽查看</span>
+        <span class="gallery-counter" id="galleryCounter"></span>
+        <div class="gallery-zoom-controls" aria-label="图片缩放控制">
+          <button class="gallery-zoom-button" id="galleryZoomOut" type="button" aria-label="缩小图片">−</button>
+          <button class="gallery-zoom-readout" id="galleryZoomReset" type="button" aria-label="恢复原始大小">
+            <span id="galleryZoomValue">100%</span>
+          </button>
+          <button class="gallery-zoom-button" id="galleryZoomIn" type="button" aria-label="放大图片">+</button>
+        </div>
+      </div>
+      <div class="gallery-thumbnails" id="galleryThumbnails" aria-label="本页作品缩略图"></div>
+    </div>
+  </section>
+
+  <section class="portfolio-overlay process-overlay" id="processOverlay" role="dialog" aria-modal="true" aria-labelledby="processTitleEn">
+    <aside class="process-drawer" id="processDrawer">
+      <header class="process-drawer-header">
+        <div class="process-kicker" id="processKicker">PROCESS NOTE · 01 / 11</div>
+        <h2 class="process-title-en" id="processTitleEn">Project Process</h2>
+        <p class="process-title-zh" id="processTitleZh">项目过程</p>
+        <p class="process-meta" id="processMeta"></p>
+        <button class="overlay-close process-close" type="button" data-close-overlay aria-label="关闭项目过程">×</button>
+      </header>
+
+      <nav class="process-tabs" id="processTabs" aria-label="切换本页项目" hidden></nav>
+
+      <div class="process-body" id="processBody">
+        <div class="process-scope">
+          <strong>PERSONAL SCOPE · 个人贡献</strong>
+          <span id="processScope"></span>
+        </div>
+
+        <section class="process-section">
+          <h3 class="process-label">OBSERVATION<span>看见了什么</span></h3>
+          <p class="process-copy" id="processObservation"></p>
+        </section>
+
+        <section class="process-section">
+          <h3 class="process-label">ACTION<span>如何回应</span></h3>
+          <ul class="process-copy process-action-list" id="processActions"></ul>
+        </section>
+
+        <section class="process-section">
+          <h3 class="process-label">TURNING POINT<span>项目如何成形</span></h3>
+          <p class="process-copy process-turning-point" id="processTurningPoint"></p>
+        </section>
+
+        <section class="process-section">
+          <h3 class="process-label">HARVEST<span>最终留下</span></h3>
+          <p class="process-copy" id="processHarvest"></p>
+        </section>
+
+        <section class="process-section">
+          <h3 class="process-label">📌 POINTS<span>能力与判断</span></h3>
+          <div class="process-points" id="processPoints"></div>
+        </section>
+      </div>
+    </aside>
+  </section>
+
+  <section class="portfolio-overlay contact-overlay" id="contactOverlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <header class="overlay-header">
+      <div class="overlay-heading">
+        <small>Get in Touch</small>
+        <h2 id="contactTitle">联系我 · Contact</h2>
+      </div>
+      <button class="overlay-close" type="button" data-close-overlay aria-label="关闭联系方式">×</button>
+    </header>
+    <div class="contact-panel">
+      <p class="contact-intro">如果这些作品与你正在关注的问题产生连接，欢迎通过以下方式联系。</p>
+
+      <div class="contact-card">
+        <span class="contact-kind">01</span>
+        <a class="contact-card-body" href="mailto:stelladai096@163.com">
+          <span class="contact-card-label">Email</span>
+          <span class="contact-card-value">stelladai096@163.com</span>
+        </a>
+        <button class="contact-copy" type="button" data-copy="stelladai096@163.com" aria-label="复制邮箱">复制</button>
+      </div>
+
+      <div class="contact-card">
+        <span class="contact-kind">02</span>
+        <div class="contact-card-body">
+          <span class="contact-card-label">WeChat</span>
+          <span class="contact-card-value">UrWaterProoff</span>
+        </div>
+        <button class="contact-copy" type="button" data-copy="UrWaterProoff" aria-label="复制微信号">复制</button>
+      </div>
+
+      <div class="contact-card">
+        <span class="contact-kind">03</span>
+        <div class="contact-card-body">
+          <span class="contact-card-label">小红书 · Xiaohongshu</span>
+          <span class="contact-card-value">xx_duoluoxi</span>
+        </div>
+        <button class="contact-copy" type="button" data-copy="xx_duoluoxi" aria-label="复制小红书账号">复制</button>
+      </div>
+    </div>
+  </section>
+
   <script>
+    const PROCESS_PROJECTS = new Map([
+      [3, [{
+        number: '01',
+        titleEn: 'Fengsong Muying',
+        titleZh: '风颂牧影',
+        meta: '2025 · CULTURAL BRAND CONCEPT · TEAM PROJECT',
+        scope: 'Project Lead · Cultural Research · Brand Positioning · Narrative Design · Visual Direction',
+        observation: '草原香品牌常被压缩为绿色、马匹与“自然疗愈”。这些符号能够迅速制造地域感，却难以支撑一组真正有差异的产品。',
+        actions: [
+          '从地点、人物关系与生活片段中寻找香型母题：篝火、大召寺、马背、额吉与秋日的梨。',
+          '让每组母题继续对应气味联想、使用时刻、命名、包装画面与传播文本。'
+        ],
+        turningPoint: '“与额吉一起摘的梨”出现后，品牌第一次从辽阔的草原回到一个具体的人。它也成为后续筛选故事的尺度：每一种香气都应有地点、有关系，也有一个值得被记住的时刻。',
+        harvest: '五组香型故事由此形成，并延展为项目计划书、产品宣传册、视觉方案与路演材料。文化线索进入命名、图像与使用场景，一套能够持续生成内容的品牌规则随之建立。',
+        points: ['Cultural Material Mapping', 'Scent Narrative System', 'Brand Direction', 'Project Leadership']
+      }]],
+      [4, [{
+        number: '02',
+        titleEn: 'The Axis Reflecting China',
+        titleZh: '中轴映华夏',
+        meta: 'CROSS-CULTURAL SHORT FILM · TEAM PROJECT',
+        scope: 'Narrative Framing · Script & Storyboard · Shooting Collaboration · Bilingual Adaptation · Visual Packaging',
+        observation: '北京中轴线同时包含建筑、礼制、历史与当代城市生活。短视频篇幅有限，观看入口需要比信息数量更早被确定。',
+        actions: [
+          '以“轴线”组织镜头，让建筑秩序提供结构，让人物行走连接古今。',
+          '依据画面重新调整英文字幕的句长与语序，把解释留给必要的文化语境。'
+        ],
+        turningPoint: '人物行走进入建筑序列后，空间不再只是背景。它成为连接历史秩序与今天北京的叙事动作，也让镜头顺序第一次拥有清晰方向。',
+        harvest: '完成英文文化传播短片《The Axis Reflecting China》，获外研社·国才杯“理解当代中国”短视频比赛北京赛区银奖。项目留下了一套从文化资料筛选到双语影像表达的工作路径。',
+        points: ['Narrative Selection', 'Storyboard Planning', 'Bilingual Adaptation', 'Cross-cultural Communication']
+      }]],
+      [5, [{
+        number: '03',
+        titleEn: 'When Images Become Public Narratives',
+        titleZh: '当影像成为公共叙事',
+        meta: '2023–2026 · SCHOOL MEDIA PRACTICE · LONG-TERM PRACTICE',
+        scope: 'Documentary Photography · Content Planning · Image Editing · On-site Coordination',
+        observation: '同一场活动进入公众号首图、微博信息流与新闻网组图时，需要三种不同的影像秩序。照片必须同时回应事实、平台比例与阅读节奏。',
+        actions: [
+          '拍摄前区分必须交付的标准记录与能够建立现场感的叙事照片。',
+          '选片时以全景、人物、动作与细节重新排列，并针对不同平台调整裁切和交付顺序。'
+        ],
+        turningPoint: '选片标准从“单张是否好看”转向“一组照片是否完整”。远景交代现场，动作推动事件，细节与表情让公共报道保留人的温度。',
+        harvest: '为官方微信公众号50余篇文章供图，单篇最高阅读量60,000+，11篇超过10,000；新闻网供图18篇，微博发布图片200余张，4次作品进入新闻网首页。',
+        points: ['Cross-platform Image Editing', 'Editorial Sequencing', 'Event Coverage', 'Team Coordination']
+      }]],
+      [6, [{
+        number: '04',
+        titleEn: 'Present',
+        titleZh: '在场——所见与被忽略之间',
+        meta: '2024 · PHOTOGRAPHIC CURATION · TEAM PROJECT',
+        scope: 'Co-curation · Thematic Framework · Image Selection · Editorial Design',
+        observation: '摄影部的影像分散在不同成员、年份与活动名下。沿用原有分类只会得到作品汇总，图像之间仍然彼此陌生。',
+        actions: [
+          '重新浏览影像档案，记录作品反复指向的对象、距离与观看方式。',
+          '以日常、城市、山野、味觉、事件与校园动物建立六个单元，再用色彩、动作与视线组织内部节奏。'
+        ],
+        turningPoint: '“在场”从展览标题变成选片尺度：一张照片是否愿意对普通事物停留足够久，决定了它能否进入这次展览。',
+        harvest: '完成六个策展单元、主题海报、展览文字、作品墙设计与现场布展。散落的个人观看由此形成一份可以重新阅读的集体影像档案。',
+        points: ['Archive Review', 'Curatorial Editing', 'Visual Sequencing', 'Collective Storytelling']
+      }]],
+      [7, [{
+        number: '05',
+        titleEn: 'Before the First Bite',
+        titleZh: '食物入口之前',
+        meta: 'CONCEPT · STYLING · PHOTOGRAPHY',
+        scope: 'Concept Development · Food Styling · Scene Building · Photography · Image Editing',
+        observation: '食物图片制造即时食欲，味觉记忆却常来自并不精致的餐桌、器皿与具体地点。两种观看需要在同一系列中相遇。',
+        actions: [
+          '第一组控制背景、光线与物体位置，观察颜色、光泽和留白如何制造入口前的期待。',
+          '第二组保留餐馆与家庭餐桌的真实状态，让地域习惯和生活痕迹进入画面。'
+        ],
+        turningPoint: '最终排序放弃菜品类别，从经过造型的静物逐渐走向普通的一餐。“被设计的食欲”与“被生活留下的味道”由此形成对照。',
+        harvest: '完成一组包含静物造型与日常记录的食物摄影系列，并系统练习自然光、质感、器皿关系与画面留白。关于味觉记忆的下一步，将需要食物来源与人物讲述进入作品。',
+        points: ['Food Styling', 'Natural-light Photography', 'Series Editing', 'Visual Memory']
+      }]],
+      [8, [{
+        number: '06',
+        titleEn: 'Being Present',
+        titleZh: '此刻，正在发生',
+        meta: '2024–2025 · DOCUMENTARY PHOTOGRAPHY · CAMPUS EVENTS',
+        scope: 'Event Photography · Moment Anticipation · Visual Selection · Public Communication',
+        observation: '运动会、文化节与舞台活动中的关键瞬间无法重复。完整报道与现场感必须在同一次拍摄中被同时保留。',
+        actions: [
+          '提前确认时间线、人物动线与重点环节，在运动项目中观察助跑线与落点，在舞台活动中同时关注候场区和观众。',
+          '组图保留动作高点，也保留结束后的松弛、失误与交流。'
+        ],
+        turningPoint: '动作结束后的一个表情常常比动作最高点更接近参与者的真实经验。那些不适合成为新闻首图的过渡时刻，开始成为系列中不可缺少的部分。',
+        harvest: '完成运动会、国际文化节、服饰风尚大赛等活动记录，相关照片用于学校官方媒体传播。不同事件也逐渐形成各自的机位判断与选片方法。',
+        points: ['Moment Anticipation', 'Event Structure Reading', 'Documentary Selection', 'Public Communication']
+      }]],
+      [9, [{
+        number: '07',
+        titleEn: 'Before We Are Defined',
+        titleZh: '在被定义之前',
+        meta: 'CREATIVE PORTRAITURE · VISUAL STYLING',
+        scope: 'Concept Development · Character Setting · Styling · Model Direction · Photography',
+        observation: '创意人像很容易停在服装与道具的展示。每组造型需要通向一种人物状态，同时为被拍摄者留下自己的位置。',
+        actions: [
+          '围绕勇敢、柔软、古怪与未知建立角色方向，让颜色、妆容、服装和道具共享同一性格线索。',
+          '拍摄中依据模特的动作习惯调整姿态，使角色设定与真实人物彼此靠近。'
+        ],
+        turningPoint: '当模特自己的动作开始改变既定角色，系列才从造型展示转向共同创作。概念提供入口，人物决定画面最终停留在哪里。',
+        harvest: '完成多角色创意肖像系列，建立从抽象主题、人物设定到造型和摄影呈现的完整路径。后续创作会在拍摄前加入人物访谈，让角色拥有更具体的经验来源。',
+        points: ['Character Direction', 'Visual Styling', 'Model Collaboration', 'Series Consistency']
+      }]],
+      [10, [{
+        number: '08',
+        titleEn: 'Campus, Made Tangible',
+        titleZh: '可被携带的校园',
+        meta: '2023–2026 · OFFICIAL CULTURAL PRODUCTS · TEAM COLLABORATION',
+        scope: 'Product-scene Planning · Visual Presentation · Product Photography · Team Collaboration',
+        observation: '台历、托特包、书签与徽章拥有不同尺寸和使用方式。统一的纯背景产品图无法说明它们如何进入校园生活。',
+        actions: [
+          '让台历进入书桌与窗边，让托特包回到通勤，让书签进入书页，让徽章回到织物与佩戴尺度。',
+          '为同一产品分别拍摄主图、使用图与细节图，适配展示页和媒体传播。'
+        ],
+        turningPoint: '人物手持进入画面后，产品第一次拥有真实尺度。校园文创的重点也从“印了什么”转向“会被怎样使用”。',
+        harvest: '完成多类官方校园文创的场景化摄影与视觉素材，为团队产品展示提供统一图像。个人贡献集中于场景策划与摄影，产品本体属于团队共同成果。',
+        points: ['Product-scene Photography', 'Usage-context Design', 'Visual Consistency', 'Authorship Clarity']
+      }]],
+      [11, [{
+        number: '09',
+        titleEn: 'Love at UIBE',
+        titleZh: '爱在小贸',
+        meta: '2025 · INDEPENDENT CULTURAL PRODUCT DESIGN',
+        scope: 'Concept · Campus Observation · Graphic Design · Copywriting · Product Extension',
+        observation: '校园猫经常出现在学生的照片、路线与日常交流中，却很少进入正式的校园记忆。单纯消费“可爱”，也会遮住流浪动物的真实处境。',
+        actions: [
+          '保留真实猫咪的毛色与辨识特征，将照片、局部插画和UIBE字母组合成统一版式。',
+          '根据明信片、书签、钥匙扣与卡包的尺寸和使用方式重新组织构图。'
+        ],
+        turningPoint: '“爱在小贸”同时连接贸大与小猫，也把设计推向更明确的态度：被携带的不只是校园偶遇，还有对长期照护的提醒。',
+        harvest: '完成明信片、书签、钥匙扣与卡包系列，并加入“不让小猫继续流浪”的倡议。更完整的版本仍需要与校园照护团队合作，让文字态度转化为具体机制。',
+        points: ['Campus Observation', 'Graphic System', 'Multi-format Adaptation', 'Responsible Cultural Design']
+      }, {
+        number: '10',
+        titleEn: 'A Letter Still Relevant Today',
+        titleZh: '仍与当下有关的一封信',
+        meta: '2025 · INDEPENDENT EDITORIAL PRODUCT DESIGN',
+        scope: 'Archive Reading · Concept Development · Image Selection · Editorial Design · Print Layout',
+        observation: '雷锋形象已经形成稳定而熟悉的视觉符号。重复肖像、红色与口号，很难让人重新停下来阅读。',
+        actions: [
+          '将视觉中心移向手写书信，以“我来读一封信”组织档案图像、文字与米白纸张感。',
+          '正面承载阅读，背面保留地址、邮票与书写区域，让一封旧信延续为一封新信。'
+        ],
+        turningPoint: '背面恢复书写功能后，明信片不再只是历史材料的展示板。阅读与书写首尾相接，产品的使用动作也进入了叙事。',
+        harvest: '完成雷锋主题明信片的概念、视觉语言与双面版式。项目也明确了一条底线：档案图像、文字出处与使用授权需要完整记录，复古视觉无法替代证据链。',
+        points: ['Archival Visual Research', 'Editorial Narrative', 'Print Layout', 'Source Awareness']
+      }]],
+      [12, [{
+        number: '11',
+        titleEn: 'Cut Away the Bad Luck',
+        titleZh: '切霉豆腐',
+        meta: '2026 · AI-NATIVE INTERACTIVE DESIGN · INDIVIDUAL PROJECT',
+        scope: 'Concept · Interaction Logic · UI Copywriting · Visual Direction · Prompt Design · Testing & Deployment',
+        observation: '“辞旧迎新”常以祝福语和静态海报出现。一个三十秒、能够亲手完成的动作，可以让愿望获得更直接的身体反馈。',
+        actions: [
+          '从“霉豆腐／霉运”的语言双关出发，将体验压缩为进入、倒计时、滑动切除与结果报告。',
+          '借助Claude Code实现页面状态、手势识别与动画，再通过移动端测试调整按钮层级、反馈节奏和结果信息。'
+        ],
+        turningPoint: '当“切掉霉运”真正落到滑动手势上，概念才从一句文案变成玩法。动作、计数与结果反馈共同构成一段完整的数字仪式。',
+        harvest: '完成可通过二维码访问的移动端互动网页，实现30秒倒计时、滑动切除、实时计数与个性化结果反馈。AI缩短了实现路径，体验的分寸仍由持续测试与人的判断决定。',
+        points: ['Gesture-based Interaction', 'Prompt Decomposition', 'Mobile Usability Testing', 'AI-assisted Prototyping']
+      }]]
+    ]);
+
     /* ===========================================
        FIXED-STAGE PRESENTATION CONTROLLER
        =========================================== */
@@ -420,7 +1610,6 @@
         this.slides = [...document.querySelectorAll('.slide')];
         this.currentSlide = this.readHash();
         this.helpPanel = document.getElementById('helpPanel');
-        this.wheelLocked = false;
         this.isAnimating = false;
         this.stageScale = 1;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -428,15 +1617,51 @@
           .toDataURL('image/webp')
           .startsWith('data:image/webp');
         this.touch = this.emptyTouchState();
+        this.wheel = this.emptyWheelState();
+        this.galleryCounts = new Map([
+          [3, 7], [4, 16], [5, 14], [6, 8], [7, 9],
+          [8, 11], [9, 9], [10, 9], [11, 13], [12, 6]
+        ]);
+        this.processProjects = PROCESS_PROJECTS;
+        this.slideTitles = [
+          '封面｜Cover',
+          '关于我｜About',
+          '风颂牧影｜Fengsong Muying',
+          '创作｜Creative Practice',
+          '新媒体｜Public Narratives',
+          '策展｜Being Present',
+          '摄影｜Before the First Bite',
+          '摄影｜Being Present',
+          '摄影｜Before We Are Defined',
+          '文创｜Campus, Made Tangible',
+          '文创｜Stories to Keep',
+          'AI｜Interactive Design',
+          '结尾｜Closing'
+        ];
+        this.activeOverlay = null;
+        this.restoreFocus = null;
+        this.galleryState = { slideNumber: 0, itemIndex: 0, count: 0 };
+        this.processState = { slideNumber: 0, projectIndex: 0 };
+        this.galleryView = {
+          scale: 1,
+          x: 0,
+          y: 0,
+          pointers: new Map(),
+          dragStart: null,
+          pinchLast: null,
+          interactionTimer: null
+        };
 
         this.setupStageScale();
         this.setupControls();
+        this.setupPortfolioOverlays();
         this.setupKeyboardNav();
         this.setupTouchNav();
         this.setupWheelNav();
         this.setupHashNav();
         this.renderInstant(this.currentSlide, false);
         this.initializeImages();
+        this.setupFirstVisitHint();
       }
 
       emptyTouchState() {
@@ -451,10 +1676,611 @@
         };
       }
 
+      emptyWheelState() {
+        return {
+          accumulatedDelta: 0,
+          direction: 0,
+          lastEventAt: 0,
+          committed: false,
+          endTimer: null
+        };
+      }
+
       readHash() {
         const match = window.location.hash.match(/slide=(\d+)/);
         const index = match ? Number(match[1]) - 1 : 0;
         return Math.max(0, Math.min(index, 12));
+      }
+
+      setupPortfolioOverlays() {
+        this.indexTrigger = document.getElementById('indexTrigger');
+        this.processTrigger = document.getElementById('processTrigger');
+        this.galleryTrigger = document.getElementById('galleryTrigger');
+        this.contactTrigger = document.getElementById('contactTrigger');
+        this.overviewOverlay = document.getElementById('overviewOverlay');
+        this.galleryOverlay = document.getElementById('galleryOverlay');
+        this.processOverlay = document.getElementById('processOverlay');
+        this.contactOverlay = document.getElementById('contactOverlay');
+        this.overviewGrid = document.getElementById('overviewGrid');
+        this.galleryStage = document.getElementById('galleryStage');
+        this.galleryMainImage = document.getElementById('galleryMainImage');
+        this.galleryThumbnails = document.getElementById('galleryThumbnails');
+        this.galleryCounter = document.getElementById('galleryCounter');
+        this.galleryTitle = document.getElementById('galleryTitle');
+        this.galleryZoomValue = document.getElementById('galleryZoomValue');
+        this.processDrawer = document.getElementById('processDrawer');
+        this.processKicker = document.getElementById('processKicker');
+        this.processTitleEn = document.getElementById('processTitleEn');
+        this.processTitleZh = document.getElementById('processTitleZh');
+        this.processMeta = document.getElementById('processMeta');
+        this.processTabs = document.getElementById('processTabs');
+        this.processBody = document.getElementById('processBody');
+        this.processScope = document.getElementById('processScope');
+        this.processObservation = document.getElementById('processObservation');
+        this.processActions = document.getElementById('processActions');
+        this.processTurningPoint = document.getElementById('processTurningPoint');
+        this.processHarvest = document.getElementById('processHarvest');
+        this.processPoints = document.getElementById('processPoints');
+        this.firstVisitHint = document.getElementById('firstVisitHint');
+
+        this.buildOverview();
+        this.indexTrigger.addEventListener('click', () => this.openOverview());
+        this.contactTrigger.addEventListener('click', () => this.openContact());
+        document.getElementById('endContactHotspot')?.addEventListener('click', (event) => this.openContact(event.currentTarget));
+        this.processTrigger.addEventListener('click', () => this.openProcess(this.currentSlide + 1));
+        this.galleryTrigger.addEventListener('click', () => this.openGallery(this.currentSlide + 1));
+        this.contactOverlay.querySelectorAll('.contact-copy[data-copy]').forEach((button) => {
+          button.addEventListener('click', () => this.copyContact(button));
+        });
+        document.getElementById('galleryPrev').addEventListener('click', () => this.moveGallery(-1));
+        document.getElementById('galleryNext').addEventListener('click', () => this.moveGallery(1));
+        document.getElementById('galleryZoomOut').addEventListener('click', () => {
+          this.setGalleryZoom(this.galleryView.scale - 0.5);
+        });
+        document.getElementById('galleryZoomIn').addEventListener('click', () => {
+          this.setGalleryZoom(this.galleryView.scale + 0.5);
+        });
+        document.getElementById('galleryZoomReset').addEventListener('click', () => this.resetGalleryView());
+
+        this.galleryStage.addEventListener('wheel', (event) => this.handleGalleryWheel(event), { passive: false });
+        this.galleryStage.addEventListener('dblclick', (event) => this.handleGalleryDoubleClick(event));
+        this.galleryStage.addEventListener('pointerdown', (event) => this.handleGalleryPointerDown(event));
+        this.galleryStage.addEventListener('pointermove', (event) => this.handleGalleryPointerMove(event));
+        this.galleryStage.addEventListener('pointerup', (event) => this.handleGalleryPointerEnd(event));
+        this.galleryStage.addEventListener('pointercancel', (event) => this.handleGalleryPointerEnd(event));
+        window.addEventListener('resize', () => {
+          if (this.activeOverlay === this.galleryOverlay) {
+            this.updateGalleryImageFit();
+            this.setGalleryPan(this.galleryView.x, this.galleryView.y);
+          }
+        });
+
+        document.querySelectorAll('[data-close-overlay]').forEach((button) => {
+          button.addEventListener('click', () => this.closeOverlay());
+        });
+        [this.overviewOverlay, this.galleryOverlay, this.processOverlay, this.contactOverlay].forEach((overlay) => {
+          overlay.addEventListener('pointerdown', (event) => {
+            if (event.target === overlay) this.closeOverlay();
+          });
+        });
+      }
+
+      setupFirstVisitHint() {
+        const storageKey = 'stella-portfolio-navigation-seen-v1';
+        let hasSeen = false;
+        try { hasSeen = window.localStorage.getItem(storageKey) === 'true'; } catch (_) { /* Storage may be unavailable. */ }
+        if (hasSeen || !this.firstVisitHint) return;
+
+        let shown = false;
+        const showHint = () => {
+          if (shown) return;
+          shown = true;
+          if (this.activeOverlay) {
+            try { window.localStorage.setItem(storageKey, 'true'); } catch (_) { /* Non-critical. */ }
+            return;
+          }
+          this.firstVisitHint.classList.add('show');
+          try { window.localStorage.setItem(storageKey, 'true'); } catch (_) { /* Non-critical. */ }
+          window.setTimeout(() => this.firstVisitHint.classList.remove('show'), 4200);
+        };
+        const loading = document.getElementById('loading');
+        if (loading?.classList.contains('done')) {
+          window.setTimeout(showHint, 500);
+        } else {
+          loading?.addEventListener('transitionend', () => window.setTimeout(showHint, 400), { once: true });
+          window.setTimeout(showHint, 3800);
+        }
+      }
+
+      buildOverview() {
+        this.slides.forEach((_, index) => {
+          const slideNumber = index + 1;
+          const button = document.createElement('button');
+          button.className = 'overview-item';
+          button.type = 'button';
+          button.dataset.slideIndex = String(index);
+          button.setAttribute('aria-label', `前往第 ${slideNumber} 页：${this.slideTitles[index]}`);
+
+          const image = document.createElement('img');
+          image.dataset.src = `assets/slides-webp/1x/slide-${String(slideNumber).padStart(2, '0')}.webp`;
+          image.alt = '';
+          image.loading = 'lazy';
+
+          const caption = document.createElement('span');
+          caption.className = 'overview-caption';
+          caption.innerHTML = `<span>${String(slideNumber).padStart(2, '0')}</span><span>${this.slideTitles[index]}</span>`;
+          button.append(image, caption);
+          button.addEventListener('click', () => {
+            this.closeOverlay(false);
+            this.showSlide(index);
+          });
+          this.overviewGrid.append(button);
+        });
+      }
+
+      openOverview() {
+        this.overviewGrid.querySelectorAll('img[data-src]').forEach((image) => {
+          image.src = image.dataset.src;
+          delete image.dataset.src;
+        });
+        this.overviewGrid.querySelectorAll('.overview-item').forEach((item) => {
+          item.classList.toggle('current', Number(item.dataset.slideIndex) === this.currentSlide);
+        });
+        this.openOverlay(this.overviewOverlay, this.indexTrigger);
+      }
+
+      openContact(trigger = this.contactTrigger) {
+        this.openOverlay(this.contactOverlay, trigger);
+      }
+
+      async copyContact(button) {
+        const value = button.dataset.copy || '';
+        let copied = false;
+
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(value);
+            copied = true;
+          } catch (_) { /* Use the selection fallback below. */ }
+        }
+
+        if (!copied) {
+          const area = document.createElement('textarea');
+          area.value = value;
+          area.setAttribute('readonly', '');
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.append(area);
+          area.select();
+          try { copied = document.execCommand('copy'); } catch (_) { copied = false; }
+          area.remove();
+        }
+
+        const original = button.dataset.originalLabel || button.textContent;
+        button.dataset.originalLabel = original;
+        button.textContent = copied ? '已复制' : '请手动复制';
+        button.classList.toggle('copied', copied);
+        window.clearTimeout(button._copyTimer);
+        button._copyTimer = window.setTimeout(() => {
+          button.textContent = original;
+          button.classList.remove('copied');
+        }, 1600);
+      }
+
+      openProcess(slideNumber, projectIndex = 0) {
+        const projects = this.processProjects.get(slideNumber);
+        if (!projects?.length) return;
+
+        const normalized = Math.max(0, Math.min(projectIndex, projects.length - 1));
+        this.processState = { slideNumber, projectIndex: normalized };
+        this.renderProcessTabs(projects, normalized);
+        this.renderProcessProject(projects[normalized]);
+        this.openOverlay(this.processOverlay, this.processTrigger);
+        this.processBody.scrollTop = 0;
+      }
+
+      renderProcessTabs(projects, currentIndex) {
+        this.processTabs.hidden = projects.length < 2;
+        this.processTabs.replaceChildren();
+        if (projects.length < 2) return;
+
+        projects.forEach((project, index) => {
+          const button = document.createElement('button');
+          button.className = 'process-tab';
+          button.classList.toggle('current', index === currentIndex);
+          button.type = 'button';
+          button.setAttribute('aria-selected', String(index === currentIndex));
+          button.textContent = `${project.number} · ${project.titleZh}`;
+          button.addEventListener('click', () => {
+            this.processState.projectIndex = index;
+            this.renderProcessTabs(projects, index);
+            this.renderProcessProject(projects[index]);
+            this.processBody.scrollTo({ top: 0, behavior: this.reducedMotion ? 'auto' : 'smooth' });
+          });
+          this.processTabs.append(button);
+        });
+      }
+
+      renderProcessProject(project) {
+        this.processKicker.textContent = `PROCESS NOTE · ${project.number} / 11`;
+        this.processTitleEn.textContent = project.titleEn;
+        this.processTitleZh.textContent = project.titleZh;
+        this.processMeta.textContent = project.meta;
+        this.processScope.textContent = project.scope;
+        this.processObservation.textContent = project.observation;
+        this.processTurningPoint.textContent = project.turningPoint;
+        this.processHarvest.textContent = project.harvest;
+
+        this.processActions.replaceChildren(...project.actions.map((action) => {
+          const item = document.createElement('li');
+          item.textContent = action;
+          return item;
+        }));
+
+        this.processPoints.replaceChildren(...project.points.map((point) => {
+          const tag = document.createElement('span');
+          tag.className = 'process-point';
+          tag.textContent = point;
+          return tag;
+        }));
+      }
+
+      openGallery(slideNumber) {
+        const count = this.galleryCounts.get(slideNumber);
+        if (!count) return;
+
+        this.galleryState = { slideNumber, itemIndex: 0, count };
+        this.galleryTitle.textContent = this.slideTitles[slideNumber - 1];
+        this.galleryThumbnails.replaceChildren();
+
+        for (let index = 0; index < count; index += 1) {
+          const button = document.createElement('button');
+          button.className = 'gallery-thumb';
+          button.type = 'button';
+          button.dataset.itemIndex = String(index);
+          button.setAttribute('aria-label', `查看作品 ${index + 1}`);
+
+          const image = document.createElement('img');
+          image.src = this.galleryAssetPath(slideNumber, index, true);
+          image.alt = '';
+          image.loading = 'lazy';
+          button.append(image);
+          button.addEventListener('click', () => this.setGalleryItem(index));
+          this.galleryThumbnails.append(button);
+        }
+
+        this.openOverlay(this.galleryOverlay, this.galleryTrigger);
+        this.setGalleryItem(0, false);
+      }
+
+      galleryAssetPath(slideNumber, itemIndex, thumbnail = false) {
+        const slide = String(slideNumber).padStart(2, '0');
+        const item = String(itemIndex + 1).padStart(2, '0');
+        return `assets/gallery/slide-${slide}/${thumbnail ? 'thumb' : 'item'}-${item}.webp`;
+      }
+
+      setGalleryItem(itemIndex, scrollThumbnail = true) {
+        const { slideNumber, count } = this.galleryState;
+        if (!count) return;
+        const normalized = (itemIndex + count) % count;
+        this.galleryState.itemIndex = normalized;
+        this.resetGalleryView(false);
+        this.galleryStage.classList.add('loading');
+        this.galleryMainImage.onload = () => {
+          this.galleryStage.classList.remove('loading');
+          this.updateGalleryImageFit();
+          this.clampGalleryPan();
+          this.applyGalleryView();
+        };
+        this.galleryMainImage.onerror = () => this.galleryStage.classList.remove('loading');
+        this.galleryMainImage.src = this.galleryAssetPath(slideNumber, normalized);
+        this.galleryMainImage.alt = `${this.slideTitles[slideNumber - 1]}，作品 ${normalized + 1}`;
+        this.galleryCounter.textContent = `${String(normalized + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
+
+        this.galleryThumbnails.querySelectorAll('.gallery-thumb').forEach((button) => {
+          button.classList.toggle('current', Number(button.dataset.itemIndex) === normalized);
+        });
+        if (scrollThumbnail) {
+          this.galleryThumbnails.querySelector('.gallery-thumb.current')?.scrollIntoView({
+            block: 'nearest',
+            behavior: this.reducedMotion ? 'auto' : 'smooth'
+          });
+        }
+
+        [-1, 1].forEach((offset) => {
+          const preloadIndex = (normalized + offset + count) % count;
+          const preload = new Image();
+          preload.src = this.galleryAssetPath(slideNumber, preloadIndex);
+        });
+      }
+
+      galleryStagePoint(clientX, clientY) {
+        const rect = this.galleryStage.getBoundingClientRect();
+        return {
+          x: clientX - rect.left - rect.width / 2,
+          y: clientY - rect.top - rect.height / 2
+        };
+      }
+
+      updateGalleryImageFit() {
+        const { naturalWidth, naturalHeight } = this.galleryMainImage;
+        if (!naturalWidth || !naturalHeight) return;
+
+        const mobile = window.innerWidth <= 720;
+        const maxWidth = this.galleryStage.clientWidth * (mobile ? 0.94 : 0.92);
+        const maxHeight = this.galleryStage.clientHeight * (mobile ? 0.9 : 0.88);
+        const ratio = naturalWidth / naturalHeight;
+        let width = maxWidth;
+        let height = width / ratio;
+
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = height * ratio;
+        }
+
+        this.galleryMainImage.style.width = `${Math.max(1, width)}px`;
+        this.galleryMainImage.style.height = `${Math.max(1, height)}px`;
+      }
+
+      galleryPanBounds(scale = this.galleryView.scale) {
+        const scaledWidth = this.galleryMainImage.offsetWidth * scale;
+        const scaledHeight = this.galleryMainImage.offsetHeight * scale;
+        return {
+          x: Math.max(0, (scaledWidth - this.galleryStage.clientWidth) / 2),
+          y: Math.max(0, (scaledHeight - this.galleryStage.clientHeight) / 2)
+        };
+      }
+
+      clampGalleryPan() {
+        if (this.galleryView.scale <= 1) {
+          this.galleryView.x = 0;
+          this.galleryView.y = 0;
+          return;
+        }
+        const bounds = this.galleryPanBounds();
+        this.galleryView.x = Math.max(-bounds.x, Math.min(bounds.x, this.galleryView.x));
+        this.galleryView.y = Math.max(-bounds.y, Math.min(bounds.y, this.galleryView.y));
+      }
+
+      applyGalleryView() {
+        const { scale, x, y } = this.galleryView;
+        this.galleryMainImage.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+        this.galleryZoomValue.textContent = `${Math.round(scale * 100)}%`;
+        this.galleryStage.classList.toggle('zoomed', scale > 1.01);
+      }
+
+      setGalleryZoom(targetScale, clientX = null, clientY = null) {
+        const oldScale = this.galleryView.scale;
+        const nextScale = Math.max(0.5, Math.min(5, targetScale));
+        if (Math.abs(nextScale - oldScale) < 0.001) return;
+
+        if (Number.isFinite(clientX) && Number.isFinite(clientY)) {
+          const anchor = this.galleryStagePoint(clientX, clientY);
+          const ratio = nextScale / oldScale;
+          this.galleryView.x = anchor.x - (anchor.x - this.galleryView.x) * ratio;
+          this.galleryView.y = anchor.y - (anchor.y - this.galleryView.y) * ratio;
+        }
+
+        this.galleryView.scale = nextScale;
+        this.clampGalleryPan();
+        this.applyGalleryView();
+      }
+
+      setGalleryPan(x, y) {
+        this.galleryView.x = x;
+        this.galleryView.y = y;
+        this.clampGalleryPan();
+        this.applyGalleryView();
+      }
+
+      resetGalleryView(animate = true) {
+        clearTimeout(this.galleryView.interactionTimer);
+        this.galleryView.scale = 1;
+        this.galleryView.x = 0;
+        this.galleryView.y = 0;
+        this.galleryView.pointers.clear();
+        this.galleryView.dragStart = null;
+        this.galleryView.pinchLast = null;
+        this.galleryStage.classList.remove('dragging', 'interacting');
+
+        if (!animate) this.galleryMainImage.style.transition = 'none';
+        this.applyGalleryView();
+        if (!animate) {
+          requestAnimationFrame(() => this.galleryMainImage.style.removeProperty('transition'));
+        }
+      }
+
+      pulseGalleryInteraction() {
+        this.galleryStage.classList.add('interacting');
+        clearTimeout(this.galleryView.interactionTimer);
+        this.galleryView.interactionTimer = setTimeout(() => {
+          if (this.galleryView.pointers.size === 0) this.galleryStage.classList.remove('interacting');
+        }, 160);
+      }
+
+      handleGalleryWheel(event) {
+        if (this.activeOverlay !== this.galleryOverlay) return;
+        event.preventDefault();
+        const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE
+          ? 18
+          : event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? 240 : 1;
+        const factor = Math.exp(-event.deltaY * unit * 0.0015);
+        this.pulseGalleryInteraction();
+        this.setGalleryZoom(this.galleryView.scale * factor, event.clientX, event.clientY);
+      }
+
+      handleGalleryDoubleClick(event) {
+        if (event.target instanceof Element && event.target.closest('button')) return;
+        event.preventDefault();
+        if (this.galleryView.scale > 1.01) this.resetGalleryView();
+        else this.setGalleryZoom(2.5, event.clientX, event.clientY);
+      }
+
+      handleGalleryPointerDown(event) {
+        if (event.target instanceof Element && event.target.closest('button')) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        event.preventDefault();
+        this.galleryStage.setPointerCapture?.(event.pointerId);
+        this.galleryView.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+        if (this.galleryView.pointers.size === 1) {
+          this.galleryView.dragStart = {
+            pointerId: event.pointerId,
+            clientX: event.clientX,
+            clientY: event.clientY,
+            x: this.galleryView.x,
+            y: this.galleryView.y
+          };
+        } else if (this.galleryView.pointers.size === 2) {
+          const [first, second] = [...this.galleryView.pointers.values()];
+          this.galleryView.pinchLast = {
+            distance: Math.hypot(second.x - first.x, second.y - first.y),
+            x: (first.x + second.x) / 2,
+            y: (first.y + second.y) / 2
+          };
+          this.galleryView.dragStart = null;
+        }
+        this.galleryStage.classList.add('interacting');
+      }
+
+      handleGalleryPointerMove(event) {
+        if (!this.galleryView.pointers.has(event.pointerId)) return;
+        event.preventDefault();
+        this.galleryView.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+        const pointers = [...this.galleryView.pointers.values()];
+
+        if (pointers.length >= 2) {
+          const [first, second] = pointers;
+          const distance = Math.max(1, Math.hypot(second.x - first.x, second.y - first.y));
+          const centerX = (first.x + second.x) / 2;
+          const centerY = (first.y + second.y) / 2;
+          const previous = this.galleryView.pinchLast;
+          if (previous) {
+            this.setGalleryPan(
+              this.galleryView.x + centerX - previous.x,
+              this.galleryView.y + centerY - previous.y
+            );
+            this.setGalleryZoom(
+              this.galleryView.scale * (distance / Math.max(1, previous.distance)),
+              centerX,
+              centerY
+            );
+          }
+          this.galleryView.pinchLast = { distance, x: centerX, y: centerY };
+          return;
+        }
+
+        if (this.galleryView.scale <= 1 || !this.galleryView.dragStart) return;
+        this.galleryStage.classList.add('dragging');
+        this.setGalleryPan(
+          this.galleryView.dragStart.x + event.clientX - this.galleryView.dragStart.clientX,
+          this.galleryView.dragStart.y + event.clientY - this.galleryView.dragStart.clientY
+        );
+      }
+
+      handleGalleryPointerEnd(event) {
+        if (!this.galleryView.pointers.has(event.pointerId)) return;
+        this.galleryView.pointers.delete(event.pointerId);
+        if (this.galleryStage.hasPointerCapture?.(event.pointerId)) {
+          this.galleryStage.releasePointerCapture(event.pointerId);
+        }
+
+        this.galleryView.pinchLast = null;
+        if (this.galleryView.pointers.size === 1 && this.galleryView.scale > 1) {
+          const [pointerId, point] = this.galleryView.pointers.entries().next().value;
+          this.galleryView.dragStart = {
+            pointerId,
+            clientX: point.x,
+            clientY: point.y,
+            x: this.galleryView.x,
+            y: this.galleryView.y
+          };
+        } else {
+          this.galleryView.dragStart = null;
+        }
+
+        if (this.galleryView.pointers.size === 0) {
+          this.galleryStage.classList.remove('dragging', 'interacting');
+        }
+      }
+
+      moveGallery(direction) {
+        if (this.activeOverlay !== this.galleryOverlay) return;
+        this.setGalleryItem(this.galleryState.itemIndex + direction);
+      }
+
+      openOverlay(overlay, trigger) {
+        this.closeOverlay(false);
+        this.firstVisitHint?.classList.remove('show');
+        this.restoreFocus = trigger || document.activeElement;
+        this.activeOverlay = overlay;
+        document.body.classList.add('overlay-open');
+        overlay.classList.add('open');
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+          overlay.querySelector('.overlay-close')?.focus({ preventScroll: true });
+        }));
+      }
+
+      closeOverlay(restoreFocus = true) {
+        if (!this.activeOverlay) return;
+        this.activeOverlay.classList.remove('open');
+        this.activeOverlay = null;
+        document.body.classList.remove('overlay-open');
+        if (restoreFocus) this.restoreFocus?.focus({ preventScroll: true });
+      }
+
+      getFocusableElements(container) {
+        return [...container.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )].filter((element) => !element.hidden && element.getClientRects().length > 0);
+      }
+
+      handleOverlayKey(event) {
+        if (!this.activeOverlay) return false;
+        if (event.key === 'Tab') {
+          const focusable = this.getFocusableElements(this.activeOverlay);
+          if (!focusable.length) {
+            event.preventDefault();
+            return true;
+          }
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && (document.activeElement === first || !this.activeOverlay.contains(document.activeElement))) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && (document.activeElement === last || !this.activeOverlay.contains(document.activeElement))) {
+            event.preventDefault();
+            first.focus();
+          }
+          return true;
+        }
+        if (event.key === 'Escape') this.closeOverlay();
+        else if (this.activeOverlay === this.galleryOverlay && event.key === 'ArrowLeft') this.moveGallery(-1);
+        else if (this.activeOverlay === this.galleryOverlay && event.key === 'ArrowRight') this.moveGallery(1);
+        else if (this.activeOverlay === this.galleryOverlay && ['+', '='].includes(event.key)) {
+          this.setGalleryZoom(this.galleryView.scale + 0.5);
+        }
+        else if (this.activeOverlay === this.galleryOverlay && event.key === '-') {
+          this.setGalleryZoom(this.galleryView.scale - 0.5);
+        }
+        else if (this.activeOverlay === this.galleryOverlay && event.key === '0') this.resetGalleryView();
+        else return true;
+        event.preventDefault();
+        return true;
+      }
+
+      updateExploreControls(index) {
+        const slideNumber = index + 1;
+        const count = this.galleryCounts.get(slideNumber);
+        const processCount = this.processProjects.get(slideNumber)?.length || 0;
+        this.galleryTrigger.hidden = !count;
+        if (count) this.galleryTrigger.textContent = `查看作品 · ${String(count).padStart(2, '0')}`;
+        this.processTrigger.hidden = !processCount;
+        if (processCount) {
+          this.processTrigger.textContent = processCount > 1
+            ? `查看过程 · ${String(processCount).padStart(2, '0')}`
+            : '查看过程 · PROCESS';
+        }
       }
 
       setupStageScale() {
@@ -478,7 +2304,20 @@
 
       setupKeyboardNav() {
         document.addEventListener('keydown', (event) => {
-          if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
+          if (this.handleOverlayKey(event)) return;
+          if (event.key.toLowerCase() === 'm') {
+            event.preventDefault();
+            this.openOverview();
+          } else if (event.key.toLowerCase() === 'p' && this.processProjects.has(this.currentSlide + 1)) {
+            event.preventDefault();
+            this.openProcess(this.currentSlide + 1);
+          } else if (event.key.toLowerCase() === 'g' && this.galleryCounts.has(this.currentSlide + 1)) {
+            event.preventDefault();
+            this.openGallery(this.currentSlide + 1);
+          } else if (event.key.toLowerCase() === 'c') {
+            event.preventDefault();
+            this.openContact();
+          } else if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
             event.preventDefault();
             this.showSlide(this.currentSlide + 1);
           } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
@@ -500,7 +2339,7 @@
 
       setupTouchNav() {
         document.addEventListener('touchstart', (event) => {
-          if (this.isAnimating || event.touches.length !== 1) return;
+          if (this.activeOverlay || this.isAnimating || event.touches.length !== 1) return;
           if (event.target instanceof Element && event.target.closest('a, button')) return;
           const touch = event.touches[0];
           this.touch = {
@@ -631,11 +2470,48 @@
 
       setupWheelNav() {
         document.addEventListener('wheel', (event) => {
-          if (this.wheelLocked || Math.abs(event.deltaY) < 18) return;
-          this.wheelLocked = true;
-          this.showSlide(this.currentSlide + (event.deltaY > 0 ? 1 : -1));
-          window.setTimeout(() => { this.wheelLocked = false; }, 620);
-        }, { passive: true });
+          if (this.activeOverlay || event.ctrlKey) return;
+          event.preventDefault();
+
+          const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE
+            ? 16
+            : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+              ? window.innerHeight
+              : 1;
+          const deltaX = event.deltaX * unit;
+          const deltaY = event.deltaY * unit;
+          const delta = Math.abs(deltaX) > Math.abs(deltaY) * 0.75 ? deltaX : deltaY;
+          if (Math.abs(delta) < 0.5) return;
+
+          const now = performance.now();
+          const direction = Math.sign(delta);
+          const startsNewGesture = now - this.wheel.lastEventAt > 180;
+          const changesDirection = this.wheel.direction && direction !== this.wheel.direction;
+
+          if (startsNewGesture || changesDirection) {
+            if (this.wheel.endTimer) window.clearTimeout(this.wheel.endTimer);
+            this.wheel = this.emptyWheelState();
+          }
+
+          this.wheel.lastEventAt = now;
+          this.wheel.direction = direction;
+          if (this.wheel.endTimer) window.clearTimeout(this.wheel.endTimer);
+          this.wheel.endTimer = window.setTimeout(() => {
+            this.wheel = this.emptyWheelState();
+          }, 180);
+
+          if (this.wheel.committed || this.isAnimating) return;
+
+          this.wheel.accumulatedDelta += delta;
+          const isDiscreteWheel = event.deltaMode !== WheelEvent.DOM_DELTA_PIXEL
+            || Math.abs(delta) >= 48;
+          const threshold = isDiscreteWheel ? 32 : 46;
+          if (Math.abs(this.wheel.accumulatedDelta) < threshold) return;
+
+          this.wheel.committed = true;
+          this.wheel.accumulatedDelta = 0;
+          this.showSlide(this.currentSlide + direction);
+        }, { passive: false });
       }
 
       setupHashNav() {
@@ -714,7 +2590,8 @@
       }
 
       updateChrome(index, updateHash) {
-        document.title = 'Stella’s Portfolio_2026';
+        document.title = `${String(index + 1).padStart(2, '0')} ${this.slideTitles[index]} · Stella’s Portfolio 2026`;
+        this.updateExploreControls(index);
 
         if (updateHash) {
           history.replaceState(null, '', `#slide=${index + 1}`);
@@ -804,11 +2681,12 @@
             this.prefetchAround(this.currentSlide);
           });
 
-        window.setTimeout(() => loading.classList.add('done'), 6000);
+        window.setTimeout(() => loading.classList.add('done'), 3000);
         window.addEventListener('beforeprint', () => {
           this.slides.forEach((_, index) => this.ensureSlideLoaded(index, true).catch(() => {}));
         });
       }
+
     }
 
     window.portfolioPresentation = new SlidePresentation();
