@@ -1,0 +1,71 @@
+/*
+ * The application below is the original production build.
+ * This layer only supplies the declared web fonts, GitHub loading fallback,
+ * and the small-height result-screen fix.
+ */
+
+.result-card {
+  flex-shrink: 0;
+}
+
+.replica-load-error {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  background: #b71c1c;
+  color: #fff;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  text-align: center;
+}
+
+.replica-load-error span {
+  opacity: 0.62;
+  font-size: 0.875rem;
+}
+
+@media (max-height: 640px) {
+  .result-shell {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .result-shell > .result-card {
+    padding: 1.5rem !important;
+  }
+
+  .result-card .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+
+  .result-card .space-y-6 {
+    margin-bottom: 0 !important;
+  }
+
+  .result-card .space-y-6 > :not(:last-child) {
+    margin-bottom: 1rem !important;
+  }
+
+  .result-card .pb-4 {
+    padding-bottom: 0.75rem !important;
+  }
+
+  .result-card .p-4 {
+    padding: 0.75rem !important;
+  }
+
+  .result-card .py-6 {
+    padding-top: 0.875rem !important;
+    padding-bottom: 0.875rem !important;
+  }
+
+  .result-shell > .result-actions {
+    margin-top: 1rem !important;
+  }
+
+  .result-shell > .result-footer {
+    margin-top: 0.5rem !important;
+  }
+}
