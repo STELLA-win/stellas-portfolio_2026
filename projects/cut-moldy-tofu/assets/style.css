@@ -329,12 +329,25 @@ button {
   align-items: center;
   justify-content: center;
   padding: max(24px, env(safe-area-inset-top)) 22px max(68px, env(safe-area-inset-bottom));
-  overflow-y: auto;
+  overflow: hidden;
+}
+
+.result-content {
+  --result-scale: 1;
+  display: flex;
+  width: 100%;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(var(--result-scale));
+  transform-origin: center;
+  will-change: transform;
 }
 
 .report-card {
   position: relative;
-  width: min(100%, 390px);
+  width: min(100%, 430px);
+  flex: 0 0 auto;
   overflow: hidden;
   border-radius: 38px;
   padding: 31px;
@@ -471,7 +484,7 @@ button {
 
 .result-actions {
   display: flex;
-  width: min(100%, 390px);
+  width: min(100%, 430px);
   gap: 13px;
   margin-top: 25px;
 }
@@ -490,6 +503,11 @@ button {
 }
 
 @media (max-height: 700px) {
+  .result-screen {
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(54px, env(safe-area-inset-bottom));
+  }
+
   .report-card {
     padding: 24px 28px;
   }
