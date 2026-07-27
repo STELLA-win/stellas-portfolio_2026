@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="切霉豆腐：滑动屏幕，切掉焦虑、内耗与生活中的小倒霉。"
+    />
+    <meta name="theme-color" content="#ef2b2d" />
+    <title>切霉豆腐｜Cut Away the Bad Luck</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <script type="module" src="./assets/game.js"></script>
+  </head>
+  <body>
+    <main id="app" aria-live="polite">
+      <section id="start-screen" class="screen start-screen is-active">
+        <div class="corner-decoration corner-decoration--top" aria-hidden="true">✣</div>
+        <div class="corner-decoration corner-decoration--bottom" aria-hidden="true">✂</div>
+        <div class="start-content">
+          <div class="title-group">
+            <h1>切霉豆腐</h1>
+            <span class="title-rule"></span>
+          </div>
+          <p class="lead">
+            切掉霉运，开启新年好运
+            <small>滑动屏幕，斩断一切不顺心</small>
+          </p>
+          <button id="start-button" class="button button--primary" type="button">开始去霉</button>
+        </div>
+        <p class="start-footer">辞旧迎新 · 仪式感小游戏</p>
+      </section>
+
+      <section id="game-screen" class="screen game-screen" aria-label="切霉豆腐游戏">
+        <canvas id="game-canvas"></canvas>
+        <div class="hud">
+          <div class="hud-card">
+            <span>倒计时</span>
+            <strong><b id="time-left">30</b>s</strong>
+          </div>
+          <div class="hud-card hud-card--right">
+            <span>已除霉</span>
+            <strong id="score">0</strong>
+          </div>
+        </div>
+        <div id="combo" class="combo" aria-hidden="true">
+          <strong><span id="combo-count">2</span> 连斩!</strong>
+          <small>霉运消散中...</small>
+        </div>
+        <div id="game-hint" class="game-hint">滑动屏幕，切开霉豆腐！</div>
+      </section>
+
+      <section id="result-screen" class="screen result-screen">
+        <article class="report-card">
+          <span class="report-orb" aria-hidden="true"></span>
+          <header class="report-header">
+            <div>
+              <h2>霉运清除报告</h2>
+              <p>Bad Luck Clearance Report</p>
+            </div>
+            <span class="trophy" aria-hidden="true">🏆</span>
+          </header>
+          <dl class="stats">
+            <div>
+              <dt>斩断霉运数</dt>
+              <dd id="result-cleared">0</dd>
+            </div>
+            <div>
+              <dt>霉运残留率</dt>
+              <dd><span id="result-remain">100</span>%</dd>
+            </div>
+          </dl>
+          <div id="good-luck-note" class="good-luck-note" hidden>
+            <strong>小插曲</strong>
+            <p>哎呀！你不小心切掉了 <b id="result-good-cut">0</b> 份好运。<br><small>下次稳一点，好运更持久哦！</small></p>
+          </div>
+          <div class="fortune">
+            <span>新年运势预测</span>
+            <strong id="fortune-text">好运加载中</strong>
+          </div>
+        </article>
+        <div class="result-actions">
+          <button id="restart-button" class="button button--ghost" type="button">↻&nbsp; 再切一次</button>
+          <button id="share-button" class="button button--primary button--flat" type="button">↗&nbsp; 分享好运</button>
+        </div>
+        <p id="share-feedback" class="share-feedback" role="status"></p>
+        <p class="result-footer">愿你新的一年，霉运全消，万事胜意</p>
+      </section>
+    </main>
+  </body>
+</html>
