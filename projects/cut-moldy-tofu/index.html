@@ -52,39 +52,41 @@
       </section>
 
       <section id="result-screen" class="screen result-screen">
-        <article class="report-card">
-          <span class="report-orb" aria-hidden="true"></span>
-          <header class="report-header">
-            <div>
-              <h2>霉运清除报告</h2>
-              <p>Bad Luck Clearance Report</p>
+        <div id="result-content" class="result-content">
+          <article class="report-card">
+            <span class="report-orb" aria-hidden="true"></span>
+            <header class="report-header">
+              <div>
+                <h2>霉运清除报告</h2>
+                <p>Bad Luck Clearance Report</p>
+              </div>
+              <span class="trophy" aria-hidden="true">🏆</span>
+            </header>
+            <dl class="stats">
+              <div>
+                <dt>斩断霉运数</dt>
+                <dd id="result-cleared">0</dd>
+              </div>
+              <div>
+                <dt>霉运残留率</dt>
+                <dd><span id="result-remain">100</span>%</dd>
+              </div>
+            </dl>
+            <div id="good-luck-note" class="good-luck-note" hidden>
+              <strong>小插曲</strong>
+              <p>哎呀！你不小心切掉了 <b id="result-good-cut">0</b> 份好运。<br><small>下次稳一点，好运更持久哦！</small></p>
             </div>
-            <span class="trophy" aria-hidden="true">🏆</span>
-          </header>
-          <dl class="stats">
-            <div>
-              <dt>斩断霉运数</dt>
-              <dd id="result-cleared">0</dd>
+            <div class="fortune">
+              <span>新年运势预测</span>
+              <strong id="fortune-text">好运加载中</strong>
             </div>
-            <div>
-              <dt>霉运残留率</dt>
-              <dd><span id="result-remain">100</span>%</dd>
-            </div>
-          </dl>
-          <div id="good-luck-note" class="good-luck-note" hidden>
-            <strong>小插曲</strong>
-            <p>哎呀！你不小心切掉了 <b id="result-good-cut">0</b> 份好运。<br><small>下次稳一点，好运更持久哦！</small></p>
+          </article>
+          <div class="result-actions">
+            <button id="restart-button" class="button button--ghost" type="button">↻&nbsp; 再切一次</button>
+            <button id="share-button" class="button button--primary button--flat" type="button">↗&nbsp; 分享好运</button>
           </div>
-          <div class="fortune">
-            <span>新年运势预测</span>
-            <strong id="fortune-text">好运加载中</strong>
-          </div>
-        </article>
-        <div class="result-actions">
-          <button id="restart-button" class="button button--ghost" type="button">↻&nbsp; 再切一次</button>
-          <button id="share-button" class="button button--primary button--flat" type="button">↗&nbsp; 分享好运</button>
+          <p id="share-feedback" class="share-feedback" role="status"></p>
         </div>
-        <p id="share-feedback" class="share-feedback" role="status"></p>
         <p class="result-footer">愿你新的一年，霉运全消，万事胜意</p>
       </section>
     </main>
