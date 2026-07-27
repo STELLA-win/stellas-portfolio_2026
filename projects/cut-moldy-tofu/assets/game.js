@@ -30,6 +30,7 @@ const scoreElement = document.querySelector("#score");
 const comboElement = document.querySelector("#combo");
 const comboCount = document.querySelector("#combo-count");
 const gameHint = document.querySelector("#game-hint");
+const resultContent = document.querySelector("#result-content");
 const canvas = document.querySelector("#game-canvas");
 const ctx = canvas.getContext("2d");
 
@@ -62,6 +63,19 @@ function setScreen(next) {
   [startScreen, gameScreen, resultScreen].forEach((element) => {
     element.classList.toggle("is-active", element.id.startsWith(next));
   });
+  if (next === "result") requestAnimationFrame(fitResult);
+}
+
+function fitResult() {
+  if (screen !== "result") return;
+  resultContent.style.setProperty("--result-scale", "1");
+  const screenStyle = getComputedStyle(resultScreen);
+  const paddingTop = Number.parseFloat(screenStyle.paddingTop) || 0;
+  const paddingBottom = Number.parseFloat(screenStyle.paddingBottom) || 0;
+  const availableHeight = Math.max(1, resultScreen.clientHeight - paddingTop - paddingBottom);
+  const naturalHeight = Math.max(1, resultContent.scrollHeight);
+  const scale = Math.min(1, availableHeight / naturalHeight);
+  resultContent.style.setProperty("--result-scale", scale.toFixed(4));
 }
 
 function resizeCanvas() {
@@ -561,6 +575,10 @@ canvas.addEventListener("pointerup", onPointerUp);
 canvas.addEventListener("pointercancel", onPointerUp);
 window.addEventListener("resize", () => {
   if (screen === "game") resizeCanvas();
+  if (screen === "result") requestAnimationFrame(fitResult);
+});
+window.visualViewport?.addEventListener("resize", () => {
+  if (screen === "result") requestAnimationFrame(fitResult);
 });
 document.addEventListener("visibilitychange", () => {
   if (document.hidden && screen === "game") pointerDown = false;
