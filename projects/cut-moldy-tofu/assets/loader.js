@@ -22,7 +22,7 @@ observer.observe(root, { childList: true, subtree: true });
 try {
   const chunkUrls = Array.from(
     { length: PART_COUNT },
-    (_, index) => new URL(`./chunks/part-${String(index).padStart(2, "0")}.txt`, import.meta.url),
+    (_, index) => new URL(`./chunks/part-${String(index).padStart(2, "0")}.txt?v=fix-2`, import.meta.url),
   );
   const responses = await Promise.all(chunkUrls.map((url) => fetch(url)));
   const failed = responses.find((response) => !response.ok);
