@@ -16,6 +16,10 @@
   font-family: "ZCOOL XiaoWei Local", "Songti SC", "STSong", serif;
 }
 
+h1.font-traditional {
+  font-family: STKaiti, KaiTi, "Songti SC", serif;
+}
+
 .result-card {
   flex-shrink: 0;
 }
