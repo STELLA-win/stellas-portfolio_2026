@@ -1,184 +1,215 @@
 [
   {
     "slide": 3,
-    "count": 7,
+    "count": 4,
     "sourceFiles": [
-      "image4.png",
-      "image5.png",
-      "image6.png",
       "image7.png",
+      "image6.png",
       "image8.png",
-      "image9.png",
-      "image10.png"
+      "image9.png"
     ],
-    "fullBytes": 423030,
-    "thumbnailBytes": 43820
+    "fullBytes": 366358,
+    "thumbnailBytes": 26488
   },
   {
     "slide": 4,
-    "count": 16,
+    "count": 3,
     "sourceFiles": [
       "image11.png",
       "image12.png",
-      "image13.png",
-      "image14.png",
-      "image15.png",
-      "image16.png",
-      "image17.png",
-      "image18.png",
-      "image19.jpeg",
-      "image20.jpeg",
-      "image21.jpeg",
-      "image22.jpeg",
-      "image23.jpeg",
-      "image24.jpeg",
-      "image25.jpeg",
-      "image26.jpeg"
+      "image13.png"
     ],
-    "fullBytes": 2755574,
-    "thumbnailBytes": 176818
+    "fullBytes": 218654,
+    "thumbnailBytes": 18746
   },
   {
     "slide": 5,
-    "count": 14,
+    "count": 4,
     "sourceFiles": [
-      "image27.jpeg",
-      "image28.jpeg",
-      "image29.jpeg",
-      "image30.jpeg",
-      "image31.jpeg",
-      "image32.jpeg",
-      "image33.jpeg",
-      "image34.png",
-      "image35.png",
-      "image36.png",
-      "image37.png",
-      "image38.png",
-      "image39.png",
-      "image40.png"
+      "image14.png",
+      "image15.png",
+      "image16.png",
+      "image17.png"
     ],
-    "fullBytes": 2338546,
-    "thumbnailBytes": 179010
+    "fullBytes": 213986,
+    "thumbnailBytes": 14092
   },
   {
     "slide": 6,
-    "count": 8,
+    "count": 2,
     "sourceFiles": [
+      "image19.png",
+      "image18.png"
+    ],
+    "fullBytes": 147544,
+    "thumbnailBytes": 6006
+  },
+  {
+    "slide": 7,
+    "count": 7,
+    "sourceFiles": [
+      "image20.png",
+      "image21.png",
+      "image22.png",
+      "image23.png",
+      "image24.png",
+      "image25.png",
+      "image26.png"
+    ],
+    "fullBytes": 358396,
+    "thumbnailBytes": 35418
+  },
+  {
+    "slide": 8,
+    "count": 16,
+    "sourceFiles": [
+      "image27.png",
+      "image28.png",
+      "image29.png",
+      "image30.png",
+      "image31.png",
+      "image32.png",
+      "image33.png",
+      "image34.png",
+      "image35.jpeg",
+      "image36.jpeg",
+      "image37.jpeg",
+      "image38.jpeg",
+      "image39.jpeg",
+      "image40.jpeg",
       "image41.jpeg",
-      "image42.jpeg",
+      "image42.jpeg"
+    ],
+    "fullBytes": 2547282,
+    "thumbnailBytes": 123440
+  },
+  {
+    "slide": 9,
+    "count": 14,
+    "sourceFiles": [
       "image43.jpeg",
       "image44.jpeg",
       "image45.jpeg",
       "image46.jpeg",
       "image47.jpeg",
-      "image48.png"
-    ],
-    "fullBytes": 1711460,
-    "thumbnailBytes": 72288
-  },
-  {
-    "slide": 7,
-    "count": 9,
-    "sourceFiles": [
-      "image53.jpeg",
-      "image52.jpeg",
-      "image54.jpeg",
-      "image49.png",
+      "image48.jpeg",
+      "image49.jpeg",
       "image50.png",
-      "image55.jpeg",
-      "image57.jpeg",
-      "image56.jpeg",
-      "image51.jpeg"
+      "image51.png",
+      "image52.png",
+      "image53.png",
+      "image54.png",
+      "image55.png",
+      "image56.png"
     ],
-    "fullBytes": 4299776,
-    "thumbnailBytes": 106672
-  },
-  {
-    "slide": 8,
-    "count": 11,
-    "sourceFiles": [
-      "image63.jpeg",
-      "image64.jpeg",
-      "image62.jpeg",
-      "image61.jpeg",
-      "image59.jpeg",
-      "image66.jpeg",
-      "image67.jpeg",
-      "image68.jpeg",
-      "image60.jpeg",
-      "image65.jpeg",
-      "image58.jpeg"
-    ],
-    "fullBytes": 5219262,
-    "thumbnailBytes": 155196
-  },
-  {
-    "slide": 9,
-    "count": 9,
-    "sourceFiles": [
-      "image71.jpeg",
-      "image69.jpeg",
-      "image77.jpeg",
-      "image72.jpeg",
-      "image73.jpeg",
-      "image75.jpeg",
-      "image70.jpeg",
-      "image74.jpeg",
-      "image76.jpeg"
-    ],
-    "fullBytes": 5173582,
-    "thumbnailBytes": 66916
+    "fullBytes": 2034972,
+    "thumbnailBytes": 156252
   },
   {
     "slide": 10,
-    "count": 9,
+    "count": 8,
     "sourceFiles": [
-      "image83.png",
-      "image85.jpeg",
-      "image86.png",
-      "image84.jpeg",
-      "image79.jpeg",
-      "image80.jpeg",
-      "image82.jpeg",
-      "image81.jpeg",
-      "image78.jpeg"
+      "image57.jpeg",
+      "image58.jpeg",
+      "image59.jpeg",
+      "image60.jpeg",
+      "image61.jpeg",
+      "image62.jpeg",
+      "image63.jpeg",
+      "image64.png"
     ],
-    "fullBytes": 1619604,
-    "thumbnailBytes": 110692
+    "fullBytes": 1800742,
+    "thumbnailBytes": 65092
   },
   {
     "slide": 11,
-    "count": 13,
+    "count": 9,
     "sourceFiles": [
-      "image87.png",
-      "image89.png",
-      "image90.png",
-      "image88.png",
-      "image91.jpeg",
-      "image93.jpeg",
-      "image94.jpeg",
-      "image92.jpeg",
-      "image95.jpeg",
-      "image96.jpeg",
-      "image99.png",
-      "image97.png",
-      "image98.png"
+      "image69.jpeg",
+      "image68.jpeg",
+      "image70.jpeg",
+      "image65.png",
+      "image66.png",
+      "image71.jpeg",
+      "image73.jpeg",
+      "image72.jpeg",
+      "image67.jpeg"
     ],
-    "fullBytes": 1676776,
-    "thumbnailBytes": 130878
+    "fullBytes": 2598520,
+    "thumbnailBytes": 77386
   },
   {
     "slide": 12,
-    "count": 6,
+    "count": 11,
     "sourceFiles": [
-      "image100.png",
-      "image102.png",
-      "image101.png",
-      "image104.png",
-      "image103.png",
-      "image105.png"
+      "image79.jpeg",
+      "image80.jpeg",
+      "image78.jpeg",
+      "image77.jpeg",
+      "image75.jpeg",
+      "image82.jpeg",
+      "image83.jpeg",
+      "image84.jpeg",
+      "image76.jpeg",
+      "image81.jpeg",
+      "image74.jpeg"
     ],
-    "fullBytes": 273478,
-    "thumbnailBytes": 28526
+    "fullBytes": 3442576,
+    "thumbnailBytes": 123328
+  },
+  {
+    "slide": 13,
+    "count": 9,
+    "sourceFiles": [
+      "image87.jpeg",
+      "image85.jpeg",
+      "image93.jpeg",
+      "image88.jpeg",
+      "image89.jpeg",
+      "image91.jpeg",
+      "image86.jpeg",
+      "image90.jpeg",
+      "image92.jpeg"
+    ],
+    "fullBytes": 2968934,
+    "thumbnailBytes": 53456
+  },
+  {
+    "slide": 14,
+    "count": 9,
+    "sourceFiles": [
+      "image99.png",
+      "image101.jpeg",
+      "image102.png",
+      "image100.jpeg",
+      "image95.jpeg",
+      "image96.jpeg",
+      "image98.jpeg",
+      "image97.jpeg",
+      "image94.jpeg"
+    ],
+    "fullBytes": 1461358,
+    "thumbnailBytes": 71720
+  },
+  {
+    "slide": 15,
+    "count": 13,
+    "sourceFiles": [
+      "image103.png",
+      "image105.png",
+      "image106.png",
+      "image104.png",
+      "image107.jpeg",
+      "image109.jpeg",
+      "image110.jpeg",
+      "image108.jpeg",
+      "image111.jpeg",
+      "image112.jpeg",
+      "image115.png",
+      "image113.png",
+      "image114.png"
+    ],
+    "fullBytes": 1258068,
+    "thumbnailBytes": 84320
   }
 ]
