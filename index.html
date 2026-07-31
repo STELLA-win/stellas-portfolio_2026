@@ -484,32 +484,51 @@
     }
 
     /* ===========================================
-       PROJECT PROCESS DRAWER
-       A reading layer for role, decisions and outcomes.
+       PROJECT CASE-STUDY DRAWER
+       One page-level model, four editorial templates.
        =========================================== */
     .process-overlay {
-      background: rgba(20, 6, 11, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(20, 6, 11, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .process-drawer {
+      --process-accent: #7d263f;
+      --process-accent-soft: rgba(125, 38, 63, 0.075);
       position: absolute;
       top: 0;
       right: 0;
       display: flex;
       flex-direction: column;
-      width: min(760px, 58vw);
+      width: min(66vw, 1240px);
       height: 100%;
       overflow: hidden;
       color: var(--ink);
-      background:
-        linear-gradient(rgba(116, 40, 60, 0.035) 1px, transparent 1px),
-        var(--paper);
-      background-size: 100% 34px;
-      box-shadow: -30px 0 80px rgba(13, 2, 7, 0.32);
+      background: #f8f5f1;
+      box-shadow: -34px 0 90px rgba(13, 2, 7, 0.34);
       transform: translateX(104%);
       transition: transform 480ms var(--ease);
+    }
+
+    .process-drawer.template-data-modeling {
+      --process-accent: #5d4387;
+      --process-accent-soft: rgba(93, 67, 135, 0.085);
+    }
+
+    .process-drawer.template-ai-product {
+      --process-accent: #b31f2b;
+      --process-accent-soft: rgba(179, 31, 43, 0.075);
+    }
+
+    .process-drawer.template-brand-communication {
+      --process-accent: #7d263f;
+      --process-accent-soft: rgba(125, 38, 63, 0.075);
+    }
+
+    .process-drawer.template-photography-curation {
+      --process-accent: #5a3942;
+      --process-accent-soft: rgba(90, 57, 66, 0.08);
     }
 
     .process-overlay.open .process-drawer { transform: translateX(0); }
@@ -517,9 +536,11 @@
     .process-drawer-header {
       position: relative;
       flex: 0 0 auto;
-      padding: 34px 76px 24px 42px;
-      border-bottom: 1px solid rgba(74, 24, 39, 0.14);
-      background: rgba(252, 250, 247, 0.94);
+      padding: 30px 82px 25px 46px;
+      border-bottom: 1px solid rgba(74, 24, 39, 0.13);
+      background:
+        radial-gradient(circle at 86% 10%, var(--process-accent-soft), transparent 34%),
+        rgba(252, 250, 247, 0.97);
     }
 
     .process-drawer-header::before {
@@ -529,16 +550,16 @@
       top: 0;
       width: 7px;
       height: 100%;
-      background: var(--plum);
+      background: var(--process-accent);
     }
 
     .process-kicker {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font: 600 10px/1 var(--ui-font);
+      margin-bottom: 12px;
+      color: var(--process-accent);
+      font: 700 10px/1 var(--ui-font);
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
@@ -547,33 +568,80 @@
       content: '';
       width: 54px;
       height: 1px;
-      background: rgba(116, 40, 60, 0.3);
+      background: color-mix(in srgb, var(--process-accent) 35%, transparent);
     }
 
     .process-title-en {
+      max-width: 820px;
       color: var(--wine);
-      font: 600 clamp(32px, 3.4vw, 52px)/0.96 var(--display-font);
+      font: 600 clamp(32px, 3vw, 50px)/0.98 var(--display-font);
       letter-spacing: -0.025em;
     }
 
     .process-title-zh {
-      margin-top: 8px;
-      color: var(--plum);
-      font: 500 19px/1.25 var(--serif-font);
-      letter-spacing: 0.04em;
+      margin-top: 7px;
+      color: var(--process-accent);
+      font: 500 18px/1.3 var(--serif-font);
+      letter-spacing: 0.035em;
     }
 
     .process-meta {
-      margin-top: 17px;
+      margin-top: 15px;
       color: var(--muted);
-      font: 600 10px/1.4 var(--ui-font);
+      font: 650 10px/1.45 var(--ui-font);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
+    .process-role {
+      max-width: 900px;
+      margin-top: 9px;
+      color: #54464a;
+      font: 500 11px/1.55 var(--ui-font);
+    }
+
+    .process-role strong {
+      margin-right: 8px;
+      color: var(--process-accent);
+      font-size: 9px;
+      letter-spacing: 0.13em;
+    }
+
+    .process-header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .process-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid color-mix(in srgb, var(--process-accent) 32%, transparent);
+      border-radius: 999px;
+      color: var(--process-accent);
+      background: rgba(255, 255, 255, 0.62);
+      font: 700 10px/1 var(--ui-font);
+      letter-spacing: 0.045em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .process-cta.primary,
+    .process-cta:hover,
+    .process-cta:focus-visible {
+      color: #fff;
+      background: var(--process-accent);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
     .process-close {
       position: absolute;
-      top: 26px;
+      top: 24px;
       right: 26px;
       width: 40px;
       height: 40px;
@@ -585,156 +653,314 @@
     .process-tabs {
       display: flex;
       flex: 0 0 auto;
-      gap: 6px;
-      padding: 12px 42px;
+      gap: 7px;
+      padding: 11px 46px;
       overflow-x: auto;
-      border-bottom: 1px solid rgba(74, 24, 39, 0.12);
-      background: rgba(246, 241, 236, 0.96);
+      border-bottom: 1px solid rgba(74, 24, 39, 0.11);
+      background: rgba(243, 238, 233, 0.98);
       scrollbar-width: none;
     }
 
-    .process-tabs::-webkit-scrollbar { display: none; }
+    .process-tabs::-webkit-scrollbar,
+    .process-section-nav::-webkit-scrollbar { display: none; }
     .process-tabs[hidden] { display: none; }
 
     .process-tab {
       flex: 0 0 auto;
-      padding: 8px 12px;
-      border: 1px solid rgba(116, 40, 60, 0.18);
+      padding: 8px 13px;
+      border: 1px solid rgba(90, 52, 64, 0.18);
       border-radius: 999px;
       color: var(--muted);
       background: transparent;
-      font: 600 10px/1 var(--ui-font);
-      letter-spacing: 0.04em;
+      font: 700 10px/1 var(--ui-font);
+      letter-spacing: 0.035em;
       cursor: pointer;
     }
 
     .process-tab.current,
     .process-tab:hover,
     .process-tab:focus-visible {
-      border-color: var(--plum);
-      color: var(--paper);
-      background: var(--plum);
+      border-color: var(--process-accent);
+      color: #fff;
+      background: var(--process-accent);
       outline: none;
     }
+
+    .process-section-nav {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 24px;
+      padding: 13px 46px 12px;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(74, 24, 39, 0.11);
+      background: rgba(252, 250, 247, 0.98);
+      scrollbar-width: none;
+    }
+
+    .process-section-link {
+      position: relative;
+      flex: 0 0 auto;
+      padding: 0 0 5px;
+      border: 0;
+      color: #75666a;
+      background: none;
+      font: 700 10px/1 var(--ui-font);
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .process-section-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      height: 2px;
+      background: var(--process-accent);
+      transition: right 180ms ease;
+    }
+
+    .process-section-link.current,
+    .process-section-link:hover,
+    .process-section-link:focus-visible {
+      color: var(--process-accent);
+      outline: none;
+    }
+
+    .process-section-link.current::after,
+    .process-section-link:hover::after { right: 0; }
 
     .process-body {
       flex: 1 1 auto;
       overflow-y: auto;
       overscroll-behavior: contain;
-      padding: 26px 42px 48px;
-      scrollbar-color: rgba(116, 40, 60, 0.34) transparent;
+      padding: 0 46px 56px;
+      scrollbar-color: color-mix(in srgb, var(--process-accent) 36%, transparent) transparent;
       scrollbar-width: thin;
+      scroll-behavior: smooth;
     }
 
     .process-body::-webkit-scrollbar { width: 6px; }
     .process-body::-webkit-scrollbar-thumb {
       border-radius: 999px;
-      background: rgba(116, 40, 60, 0.34);
-    }
-
-    .process-scope {
-      margin-bottom: 26px;
-      padding: 15px 17px;
-      border-left: 3px solid var(--plum);
-      color: var(--wine);
-      background: rgba(116, 40, 60, 0.055);
-      font: 600 12px/1.55 var(--ui-font);
-      letter-spacing: 0.025em;
-    }
-
-    .process-scope strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--muted);
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      background: color-mix(in srgb, var(--process-accent) 36%, transparent);
     }
 
     .process-section {
-      display: grid;
-      grid-template-columns: 124px minmax(0, 1fr);
-      gap: 18px;
-      padding: 21px 0;
-      border-top: 1px solid rgba(74, 24, 39, 0.12);
+      padding: 34px 0 38px;
+      border-bottom: 1px solid rgba(74, 24, 39, 0.12);
+      scroll-margin-top: 12px;
       opacity: 0;
       transform: translateY(10px);
     }
+
+    .process-section:last-child { border-bottom: 0; }
 
     .process-overlay.open .process-section {
       animation: processReveal 440ms var(--ease) forwards;
     }
 
-    .process-overlay.open .process-section:nth-of-type(2) { animation-delay: 45ms; }
-    .process-overlay.open .process-section:nth-of-type(3) { animation-delay: 90ms; }
-    .process-overlay.open .process-section:nth-of-type(4) { animation-delay: 135ms; }
-    .process-overlay.open .process-section:nth-of-type(5) { animation-delay: 180ms; }
+    .process-overlay.open .process-section:nth-child(2) { animation-delay: 45ms; }
+    .process-overlay.open .process-section:nth-child(3) { animation-delay: 90ms; }
+    .process-overlay.open .process-section:nth-child(4) { animation-delay: 135ms; }
 
     @keyframes processReveal {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .process-label {
-      color: var(--plum);
-      font: 700 10px/1.35 var(--ui-font);
-      letter-spacing: 0.12em;
+    .process-section-head {
+      display: grid;
+      grid-template-columns: 138px minmax(0, 1fr);
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .process-section-index {
+      color: var(--process-accent);
+      font: 750 10px/1.35 var(--ui-font);
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    .process-label span {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: none;
+    .process-section-title {
+      color: var(--wine);
+      font: 500 clamp(20px, 2vw, 28px)/1.15 var(--serif-font);
+      letter-spacing: 0.015em;
     }
+
+    .process-section-content { margin-left: 158px; }
 
     .process-copy {
+      max-width: 820px;
       color: #3d3034;
-      font: 400 14px/1.8 var(--sans-font);
+      font: 400 14px/1.82 var(--sans-font);
     }
 
-    .process-action-list {
+    .process-overview-grid {
       display: grid;
-      gap: 9px;
+      grid-template-columns: minmax(0, 1.6fr) minmax(250px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .process-summary {
+      color: #392a2f;
+      font: 500 clamp(17px, 1.65vw, 23px)/1.65 var(--serif-font);
+    }
+
+    .process-scope {
+      padding: 17px 18px;
+      border-top: 3px solid var(--process-accent);
+      color: var(--wine);
+      background: var(--process-accent-soft);
+      font: 650 11px/1.65 var(--ui-font);
+      letter-spacing: 0.02em;
+    }
+
+    .process-scope strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--process-accent);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .process-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .process-fact {
+      min-height: 82px;
+      padding: 14px 15px;
+      border: 1px solid rgba(74, 24, 39, 0.12);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .process-fact-value {
+      display: block;
+      color: var(--process-accent);
+      font: 650 clamp(19px, 1.7vw, 26px)/1 var(--display-font);
+      letter-spacing: -0.02em;
+    }
+
+    .process-fact-label {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font: 650 9px/1.35 var(--ui-font);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .process-method-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      list-style: none;
+      counter-reset: process-step;
+    }
+
+    .template-brand-communication .process-method-list,
+    .template-photography-curation .process-method-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .process-method-card {
+      position: relative;
+      min-height: 150px;
+      padding: 48px 17px 18px;
+      border: 1px solid rgba(74, 24, 39, 0.12);
+      background: rgba(255, 255, 255, 0.5);
+      counter-increment: process-step;
+    }
+
+    .process-method-card::before {
+      content: '0' counter(process-step);
+      position: absolute;
+      top: 15px;
+      left: 17px;
+      color: var(--process-accent);
+      font: 750 10px/1 var(--ui-font);
+      letter-spacing: 0.1em;
+    }
+
+    .process-method-card p {
+      color: #44363a;
+      font: 400 13px/1.72 var(--sans-font);
+    }
+
+    .process-evidence {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.65fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .process-evidence-copy {
+      padding: 20px 22px;
+      border-left: 3px solid var(--process-accent);
+      color: var(--wine);
+      background: var(--process-accent-soft);
+      font: 500 15px/1.78 var(--serif-font);
+    }
+
+    .process-evidence-list {
+      display: grid;
+      gap: 8px;
       list-style: none;
     }
 
-    .process-action-list li {
-      position: relative;
-      padding-left: 17px;
+    .process-evidence-list li {
+      padding: 11px 13px;
+      border: 1px solid rgba(74, 24, 39, 0.11);
+      color: #4a3c40;
+      background: rgba(255, 255, 255, 0.5);
+      font: 650 10px/1.45 var(--ui-font);
+      letter-spacing: 0.03em;
     }
 
-    .process-action-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--plum);
-    }
-
-    .process-turning-point {
-      padding: 16px 18px;
+    .process-reflection {
+      max-width: 850px;
+      padding: 24px 26px;
+      border-top: 1px solid color-mix(in srgb, var(--process-accent) 42%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--process-accent) 42%, transparent);
       color: var(--wine);
-      background: rgba(116, 40, 60, 0.065);
-      font-family: var(--serif-font);
-      font-size: 15px;
-      line-height: 1.75;
+      background: linear-gradient(90deg, var(--process-accent-soft), transparent);
+      font: 500 16px/1.82 var(--serif-font);
+    }
+
+    .process-boundary {
+      margin-top: 16px;
+      max-width: 850px;
+      color: #66585c;
+      font: 400 12px/1.7 var(--sans-font);
+    }
+
+    .process-boundary strong {
+      color: var(--process-accent);
+      font: 750 9px/1 var(--ui-font);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .process-points {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 20px;
     }
 
     .process-point {
       padding: 7px 10px;
-      border: 1px solid rgba(116, 40, 60, 0.2);
+      border: 1px solid color-mix(in srgb, var(--process-accent) 24%, transparent);
       border-radius: 999px;
-      color: var(--plum);
-      background: rgba(255, 255, 255, 0.48);
-      font: 600 10px/1 var(--ui-font);
+      color: var(--process-accent);
+      background: rgba(255, 255, 255, 0.5);
+      font: 650 10px/1 var(--ui-font);
     }
 
     .overview-grid {
@@ -1175,18 +1401,28 @@
       .gallery-zoom-controls { right: 10px; bottom: 10px; }
 
       .process-drawer { width: 100%; }
-      .process-drawer-header { padding: 28px 64px 20px 24px; }
+      .process-drawer-header { padding: 25px 62px 20px 24px; }
       .process-title-en { font-size: clamp(30px, 10vw, 42px); }
       .process-title-zh { font-size: 17px; }
       .process-close { top: 20px; right: 18px; }
       .process-tabs { padding: 10px 24px; }
-      .process-body { padding: 20px 24px 42px; }
-      .process-section {
+      .process-section-nav { gap: 18px; padding: 12px 24px 10px; }
+      .process-body { padding: 0 24px 42px; }
+      .process-section { padding: 27px 0 31px; }
+      .process-section-head {
         grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 18px 0;
+        gap: 7px;
+        margin-bottom: 17px;
       }
-      .process-label span { display: inline; margin: 0 0 0 7px; }
+      .process-section-content { margin-left: 0; }
+      .process-overview-grid,
+      .process-evidence { grid-template-columns: 1fr; }
+      .process-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-method-list,
+      .template-brand-communication .process-method-list,
+      .template-photography-curation .process-method-list { grid-template-columns: 1fr; }
+      .process-method-card { min-height: 0; }
+      .process-header-actions { margin-top: 15px; }
       .contact-panel { inset: 92px 16px 18px; width: calc(100% - 32px); }
       .contact-card { grid-template-columns: 54px minmax(0, 1fr) auto; min-height: 78px; padding: 12px; }
       .contact-copy { min-width: 64px; min-height: 44px; }
@@ -1362,46 +1598,18 @@
   <section class="portfolio-overlay process-overlay" id="processOverlay" role="dialog" aria-modal="true" aria-labelledby="processTitleEn">
     <aside class="process-drawer" id="processDrawer">
       <header class="process-drawer-header">
-        <div class="process-kicker" id="processKicker">PROCESS NOTE · 01 / 14</div>
-        <h2 class="process-title-en" id="processTitleEn">Project Process</h2>
-        <p class="process-title-zh" id="processTitleZh">项目过程</p>
+        <div class="process-kicker" id="processKicker">CASE STUDY · 03</div>
+        <h2 class="process-title-en" id="processTitleEn">Project Case Study</h2>
+        <p class="process-title-zh" id="processTitleZh">项目案例</p>
         <p class="process-meta" id="processMeta"></p>
+        <p class="process-role"><strong>ROLE</strong><span id="processRole"></span></p>
+        <div class="process-header-actions" id="processHeaderActions"></div>
         <button class="overlay-close process-close" type="button" data-close-overlay aria-label="关闭项目过程">×</button>
       </header>
 
       <nav class="process-tabs" id="processTabs" aria-label="切换本页项目" hidden></nav>
-
-      <div class="process-body" id="processBody">
-        <div class="process-scope">
-          <strong>PERSONAL SCOPE · 个人贡献</strong>
-          <span id="processScope"></span>
-        </div>
-
-        <section class="process-section">
-          <h3 class="process-label">OBSERVATION<span>看见了什么</span></h3>
-          <p class="process-copy" id="processObservation"></p>
-        </section>
-
-        <section class="process-section">
-          <h3 class="process-label">ACTION<span>如何回应</span></h3>
-          <ul class="process-copy process-action-list" id="processActions"></ul>
-        </section>
-
-        <section class="process-section">
-          <h3 class="process-label">TURNING POINT<span>项目如何成形</span></h3>
-          <p class="process-copy process-turning-point" id="processTurningPoint"></p>
-        </section>
-
-        <section class="process-section">
-          <h3 class="process-label">HARVEST<span>最终留下</span></h3>
-          <p class="process-copy" id="processHarvest"></p>
-        </section>
-
-        <section class="process-section">
-          <h3 class="process-label">📌 POINTS<span>能力与判断</span></h3>
-          <div class="process-points" id="processPoints"></div>
-        </section>
-      </div>
+      <nav class="process-section-nav" id="processSectionNav" aria-label="项目案例章节"></nav>
+      <div class="process-body" id="processBody"></div>
     </aside>
   </section>
 
@@ -1446,7 +1654,7 @@
   </section>
 
   <script>
-    const PROCESS_PROJECTS = new Map([
+    const PROJECT_CASES_BY_PAGE = new Map([
       [3, [{
         number: '01',
         titleEn: 'Modeling Hidden Votes',
@@ -1539,6 +1747,34 @@
         turningPoint: '人物行走进入建筑序列后，空间不再只是背景。它成为连接历史秩序与今天北京的叙事动作，也让镜头顺序第一次拥有清晰方向。',
         harvest: '完成英文文化传播短片《The Axis Reflecting China》，获外研社·国才杯“理解当代中国”短视频比赛北京赛区银奖。项目留下了一套从文化资料筛选到双语影像表达的工作路径。',
         points: ['Narrative Selection', 'Storyboard Planning', 'Bilingual Adaptation', 'Cross-cultural Communication']
+      }, {
+        titleEn: 'Visual Communication',
+        titleZh: '视觉传达',
+        meta: 'EDITORIAL DESIGN · POSTERS · BROCHURES',
+        scope: 'Information Hierarchy · Editorial Layout · Poster Design · Brochure System · Visual Packaging',
+        observation: '研究报告、品牌方案与公共议题面对不同受众，却都需要在有限版面中快速建立阅读入口。视觉设计的任务不是覆盖内容，而是判断什么先被看见、什么需要被解释、什么应当被留白。',
+        actions: [
+          '先拆分受众、使用场景与核心信息，再用标题、数据、图像和注释建立明确的阅读层级。',
+          '根据封面、海报与宣传册的比例和阅读距离调整网格、字体与图像密度，保持同一项目在不同载体中的识别一致。',
+          '以研究报告、品牌传播与公共主题为不同测试场景，检查视觉语言是否真正服务信息。'
+        ],
+        turningPoint: '当“风格统一”被改写为“阅读路径统一”，版式不再依赖单张画面的装饰感。网格、层级和留白开始共同承担叙事。',
+        harvest: '形成覆盖研究报告封面、项目海报、品牌宣传册与主题传播物料的视觉实践，并建立从信息梳理到多规格适配的工作方法。',
+        points: ['Information Hierarchy', 'Editorial Grid', 'Multi-format Adaptation', 'Visual Consistency']
+      }, {
+        titleEn: 'Presentation Design',
+        titleZh: '路演展示',
+        meta: 'NARRATIVE STRUCTURE · DATA VISUALIZATION · DECK DESIGN',
+        scope: 'Story Structure · Evidence Selection · Data Visualization · Slide System · Presentation Support',
+        observation: '建模、商业与研究项目往往拥有大量材料，但路演现场只允许观众沿一条路径理解。幻灯片需要在内容完整与即时可读之间建立取舍。',
+        actions: [
+          '从评审或观众最需要回答的问题出发，重排背景、判断、证据与结论，而不是照搬报告目录。',
+          '把关键数字、模型关系与方案差异转化为可比较的视觉单元，并用固定网格维持节奏。',
+          '结合讲述顺序检查单页信息量，让页面承担提示、证据或转场中的一种主要职责。'
+        ],
+        turningPoint: '当每一页都被要求回答“这一页推动了什么判断”，演示文稿才从材料容器变成叙事界面。',
+        harvest: '完成多类项目的路演结构、数据可视化与页面系统设计，使研究逻辑、商业方案与项目价值能够在有限时间内被连续理解。',
+        points: ['Narrative Architecture', 'Data Visualization', 'Slide System', 'Presentation Clarity']
       }]],
       [9, [{
         number: '07',
@@ -1661,6 +1897,283 @@
       }]]
     ]);
 
+    const CASE_STUDY_TEMPLATES = {
+      'data-modeling': {
+        overviewTitle: '研究问题与判断入口',
+        methodTitle: '数据、模型与推演路径',
+        evidenceTitle: '验证方式与结果',
+        reflectionTitle: '模型边界与下一步'
+      },
+      'ai-product': {
+        overviewTitle: '产品意图与体验入口',
+        methodTitle: '体验流程与系统实现',
+        evidenceTitle: '测试、交付与可用性',
+        reflectionTitle: '产品判断与技术边界'
+      },
+      'brand-communication': {
+        overviewTitle: '项目、受众与表达目标',
+        methodTitle: '策略、叙事与视觉表达',
+        evidenceTitle: '交付成果与传播影响',
+        reflectionTitle: '角色判断与项目边界'
+      },
+      'photography-curation': {
+        overviewTitle: '系列主题与观看方式',
+        methodTitle: '拍摄、选择与编辑过程',
+        evidenceTitle: '系列形成与实际使用',
+        reflectionTitle: '观看反思与下一步'
+      }
+    };
+
+    const CASE_STUDY_PAGE_META = new Map([
+      [3, { category: 'DATA & MODELING', template: 'data-modeling' }],
+      [4, { category: 'DATA & MODELING', template: 'data-modeling' }],
+      [5, { category: 'AI PRODUCT & INTERACTION', template: 'ai-product' }],
+      [6, { category: 'AI PRODUCT & INTERACTION', template: 'ai-product' }],
+      [7, { category: 'BRAND & NARRATIVE', template: 'brand-communication' }],
+      [8, { category: 'CREATIVE PRACTICE', template: 'brand-communication' }],
+      [9, { category: 'PUBLIC COMMUNICATION', template: 'brand-communication' }],
+      [10, { category: 'CURATION & COMMUNICATION', template: 'brand-communication' }],
+      [11, { category: 'PHOTOGRAPHY & EDITING', template: 'photography-curation' }],
+      [12, { category: 'PHOTOGRAPHY & DOCUMENTATION', template: 'photography-curation' }],
+      [13, { category: 'PHOTOGRAPHY & PORTRAITURE', template: 'photography-curation' }],
+      [14, { category: 'CULTURAL PRODUCT & IMAGE', template: 'brand-communication' }],
+      [15, { category: 'CULTURAL PRODUCT DESIGN', template: 'brand-communication' }]
+    ]);
+
+    const PROJECT_DETAIL_META = new Map([
+      [3, [{
+        id: 'hidden-votes',
+        tabLabel: '隐藏投票建模',
+        facts: [
+          { value: '2026', label: 'MCM / ICM' },
+          { value: 'Bayesian', label: 'Hidden-vote reconstruction' },
+          { value: 'EBDQF', label: 'Proposed scoring mechanism' },
+          { value: 'HM', label: 'Honorable Mention' }
+        ],
+        evidence: ['跨季节目记录清洗', '隐藏票份额可行分布', '评分机制对照与推演', 'MCM/ICM Honorable Mention'],
+        boundary: '观众票是受公开结果约束的概率分布，而非可被精确还原的事实值；结论需要与假设和不确定性同时阅读。'
+      }]],
+      [4, [{
+        id: 'credit-eligibility',
+        tabLabel: '客户资格预测',
+        facts: [
+          { value: '36,000', label: 'Labeled records' },
+          { value: '13', label: 'Customer features' },
+          { value: '22.22%', label: 'Positive-class share' },
+          { value: 'XGBoost', label: 'Selected model' }
+        ],
+        evidence: ['多模型比较与误差分析', '类别不平衡处理', '预测概率校准', 'Ranked Leads 业务输出'],
+        boundary: '模型用于触达排序与资源分配，不替代真实业务规则或信用决策；跨时段部署仍需持续监测数据漂移。'
+      }]],
+      [5, [{
+        id: 'cut-away',
+        tabLabel: '切霉豆腐',
+        facts: [
+          { value: '30 sec', label: 'Core interaction' },
+          { value: '6', label: 'Experience stages' },
+          { value: 'Touch', label: 'Mobile-first gesture' },
+          { value: 'QR', label: 'No-download access' }
+        ],
+        evidence: ['触摸与鼠标手势', '碰撞、连击与即时反馈', '清除报告与重玩分享', '移动端真机测试与部署'],
+        boundary: 'AI 辅助缩短了代码与视觉探索路径；玩法节奏、文化分寸和最终可用性仍由人的测试与取舍决定。',
+        cta: { label: '体验互动项目 ↗', href: 'https://service-453083130386.us-west2.run.app/' }
+      }]],
+      [6, [{
+        id: 'paperprism',
+        tabLabel: 'PaperPrism',
+        facts: [
+          { value: '6', label: 'Learning stages' },
+          { value: 'Bilingual', label: 'Curated paper library' },
+          { value: 'Interactive', label: 'Formula exploration' },
+          { value: 'Graph', label: 'Paper relationships' }
+        ],
+        evidence: ['前置知识显式化', '论文结构重组', '参数调节与模型响应', '相关论文与技术谱系连接'],
+        boundary: '原型帮助读者进入论文、理解关系并继续学习，不替代原文、同行评审或对实验结论的独立核验。'
+      }]],
+      [7, [{
+        id: 'fengsong',
+        tabLabel: '风颂牧影',
+        facts: [
+          { value: '5', label: 'Scent story routes' },
+          { value: 'Lead', label: 'Project role' },
+          { value: 'System', label: 'Narrative to packaging' },
+          { value: 'Team', label: 'Collaborative project' }
+        ],
+        evidence: ['五组香型故事', '项目计划书', '产品宣传册与视觉方案', '路演材料'],
+        boundary: '项目为团队共同成果；个人贡献集中在项目统筹、文化研究、品牌定位、叙事结构与视觉方向。'
+      }]],
+      [8, [{
+        id: 'video-production',
+        tabLabel: '视频生产',
+        facts: [
+          { value: 'EN', label: 'Cross-cultural film' },
+          { value: 'Axis', label: 'Narrative structure' },
+          { value: 'Silver', label: 'Beijing regional award' },
+          { value: 'Team', label: 'Collaborative production' }
+        ],
+        evidence: ['脚本与分镜', '人物行走的空间叙事', '英文字幕适配', '北京赛区银奖'],
+        boundary: '短片为团队项目；个人贡献聚焦叙事框架、脚本分镜、拍摄协作、双语适配与视觉包装。'
+      }, {
+        id: 'visual-communication',
+        tabLabel: '视觉传达',
+        facts: [
+          { value: '3', label: 'Core media types' },
+          { value: 'Grid', label: 'Reading hierarchy' },
+          { value: 'Multi-size', label: 'Format adaptation' },
+          { value: 'Series', label: 'Practice collection' }
+        ],
+        evidence: ['研究与项目报告封面', '公共主题海报', '品牌宣传册', '多规格传播物料'],
+        boundary: '本组呈现视觉组织与版式判断；具体项目中的研究结论与品牌内容仍以原团队或原报告为准。'
+      }, {
+        id: 'presentation-design',
+        tabLabel: '路演展示',
+        facts: [
+          { value: '1 page', label: 'One core judgment' },
+          { value: 'Data', label: 'Visualized evidence' },
+          { value: 'Grid', label: 'Consistent slide system' },
+          { value: 'Multi', label: 'Project contexts' }
+        ],
+        evidence: ['报告目录重组为叙事路径', '关键数字与模型关系可视化', '固定网格与页面节奏', '讲述顺序与单页信息量检查'],
+        boundary: '演示设计负责澄清逻辑与证据关系，不替代项目本身的研究质量；所有量化结论仍需回到原始来源。'
+      }]],
+      [9, [{
+        id: 'public-narratives',
+        tabLabel: '公共影像叙事',
+        facts: [
+          { value: '50+', label: 'WeChat articles' },
+          { value: '60,000+', label: 'Highest single reach' },
+          { value: '200+', label: 'Weibo images' },
+          { value: '4', label: 'Homepage features' }
+        ],
+        evidence: ['11 篇推送阅读量超过 10,000', '新闻网 18 篇供图', '微博发布图片 200 余张', '4 次进入新闻网首页'],
+        boundary: '成果来自长期学校媒体协作；数据描述公开传播使用情况，不等同于单一图片的独立传播效果。'
+      }]],
+      [10, [{
+        id: 'present-curation',
+        tabLabel: '在场',
+        facts: [
+          { value: '6', label: 'Curatorial chapters' },
+          { value: '2024', label: 'Exhibition year' },
+          { value: 'Archive', label: 'Source material' },
+          { value: 'Team', label: 'Co-curation' }
+        ],
+        evidence: ['六个策展单元', '主题海报与展览文字', '作品墙设计', '现场布展'],
+        boundary: '展览为共同策展与集体影像成果；个人贡献集中在主题框架、选片、编辑设计与现场协作。'
+      }]],
+      [11, [{
+        id: 'first-bite',
+        tabLabel: '食物入口之前',
+        facts: [
+          { value: '2', label: 'Contrasting image routes' },
+          { value: 'Still', label: 'Styled photography' },
+          { value: 'Daily', label: 'Lived table scenes' },
+          { value: 'Series', label: 'Editorial sequencing' }
+        ],
+        evidence: ['造型静物与真实餐桌对照', '自然光与材质练习', '器皿关系与留白控制', '从设计感走向日常的排序'],
+        boundary: '当前系列主要处理视觉与味觉记忆；食物来源、制作人物与地域叙事仍是下一阶段需要补足的证据。'
+      }]],
+      [12, [{
+        id: 'being-present',
+        tabLabel: '此刻，正在发生',
+        facts: [
+          { value: '2024–25', label: 'Practice period' },
+          { value: 'Live', label: 'Unrepeatable moments' },
+          { value: 'Series', label: 'Event sequencing' },
+          { value: 'Media', label: 'Official use' }
+        ],
+        evidence: ['运动会现场记录', '国际文化节记录', '服饰风尚大赛记录', '学校官方媒体使用'],
+        boundary: '公共报道要求事实完整；系列编辑同时保留过渡、失误与交流，但不以叙事效果改变事件事实。'
+      }]],
+      [13, [{
+        id: 'before-defined',
+        tabLabel: '在被定义之前',
+        facts: [
+          { value: '4', label: 'Character directions' },
+          { value: 'Style', label: 'Makeup and wardrobe' },
+          { value: 'Co-create', label: 'Model collaboration' },
+          { value: 'Series', label: 'Visual consistency' }
+        ],
+        evidence: ['角色方向与性格线索', '妆容、服装与道具系统', '依据模特动作调整姿态', '多角色创意肖像系列'],
+        boundary: '角色概念只是入口，不应覆盖被拍摄者的真实经验；后续将增加拍摄前访谈与更明确的共同署名。'
+      }]],
+      [14, [{
+        id: 'campus-tangible',
+        tabLabel: '可被携带的校园',
+        facts: [
+          { value: '4', label: 'Product categories' },
+          { value: '3', label: 'Shot types per product' },
+          { value: 'Scene', label: 'Usage-context planning' },
+          { value: 'Team', label: 'Shared product authorship' }
+        ],
+        evidence: ['台历、托特包、书签与徽章', '主图、使用图与细节图', '真实尺度与人物手持', '统一产品展示图像'],
+        boundary: '个人贡献为场景策划、摄影与视觉呈现；产品本体、设计与生产属于团队共同成果。'
+      }]],
+      [15, [{
+        id: 'love-at-uibe',
+        tabLabel: '爱在小贸',
+        facts: [
+          { value: '4', label: 'Product extensions' },
+          { value: 'Cats', label: 'Campus observation' },
+          { value: 'System', label: 'Unified visual language' },
+          { value: 'Care', label: 'Responsible message' }
+        ],
+        evidence: ['明信片', '书签', '钥匙扣', '卡包'],
+        boundary: '倡议目前停留在设计表达；更完整的版本需要与校园照护团队合作，把态度转化为持续照护机制。'
+      }, {
+        id: 'leifeng-postcards',
+        tabLabel: '雷锋主题明信片',
+        facts: [
+          { value: '2-sided', label: 'Reading and writing' },
+          { value: 'Letter', label: 'Narrative center' },
+          { value: 'Archive', label: 'Visual research' },
+          { value: 'Print', label: 'Editorial product' }
+        ],
+        evidence: ['手写书信作为视觉中心', '档案图像与文字组织', '正面阅读、背面书写', '双面印刷版式'],
+        boundary: '档案图像、文字出处与使用授权需要完整记录；复古视觉语言不能替代可追溯的证据链。'
+      }]]
+    ]);
+
+    const PORTFOLIO_PAGE_BASE = [
+      { page: 1, title: '封面｜Cover' },
+      { page: 2, title: '关于我｜About' },
+      { page: 3, title: '数理｜Modeling Hidden Votes', galleryCount: 4 },
+      { page: 4, title: '机器学习｜Credit Card Eligibility', galleryCount: 3 },
+      { page: 5, title: 'AI｜Cut Away the Bad Luck', galleryCount: 4 },
+      { page: 6, title: 'AI｜PaperPrism', galleryCount: 2 },
+      { page: 7, title: '风颂牧影｜Fengsong Muying', galleryCount: 7 },
+      { page: 8, title: '创作｜Creative Practice', galleryCount: 16 },
+      { page: 9, title: '新媒体｜Public Narratives', galleryCount: 14 },
+      { page: 10, title: '策展｜Present', galleryCount: 8 },
+      { page: 11, title: '摄影｜Before the First Bite', galleryCount: 9 },
+      { page: 12, title: '摄影｜Being Present', galleryCount: 11 },
+      { page: 13, title: '摄影｜Before We Are Defined', galleryCount: 9 },
+      { page: 14, title: '文创｜Campus, Made Tangible', galleryCount: 9 },
+      { page: 15, title: '文创｜Stories to Keep', galleryCount: 13 },
+      { page: 16, title: '结尾｜Closing' }
+    ];
+
+    const PORTFOLIO_PAGES = PORTFOLIO_PAGE_BASE.map((basePage) => {
+      const pageMeta = CASE_STUDY_PAGE_META.get(basePage.page);
+      const projectDetails = PROJECT_DETAIL_META.get(basePage.page) || [];
+      const projects = (PROJECT_CASES_BY_PAGE.get(basePage.page) || []).map((project, index) => ({
+        ...project,
+        ...projectDetails[index],
+        id: projectDetails[index]?.id || `page-${basePage.page}-project-${index + 1}`,
+        tabLabel: projectDetails[index]?.tabLabel || project.titleZh
+      }));
+
+      return {
+        ...basePage,
+        ...pageMeta,
+        projects,
+        templateCopy: pageMeta ? CASE_STUDY_TEMPLATES[pageMeta.template] : null
+      };
+    });
+
+    const PORTFOLIO_PAGE_BY_NUMBER = new Map(
+      PORTFOLIO_PAGES.map((page) => [page.page, page])
+    );
+
     /* ===========================================
        FIXED-STAGE PRESENTATION CONTROLLER
        =========================================== */
@@ -1679,29 +2192,18 @@
           .startsWith('data:image/webp');
         this.touch = this.emptyTouchState();
         this.wheel = this.emptyWheelState();
-        this.galleryCounts = new Map([
-          [3, 4], [4, 3], [5, 4], [6, 2], [7, 7], [8, 16], [9, 14],
-          [10, 8], [11, 9], [12, 11], [13, 9], [14, 9], [15, 13]
-        ]);
-        this.processProjects = PROCESS_PROJECTS;
-        this.slideTitles = [
-          '封面｜Cover',
-          '关于我｜About',
-          '数理｜Modeling Hidden Votes',
-          '机器学习｜Credit Card Eligibility',
-          'AI｜Cut Away the Bad Luck',
-          'AI｜PaperPrism',
-          '风颂牧影｜Fengsong Muying',
-          '创作｜Creative Practice',
-          '新媒体｜Public Narratives',
-          '策展｜Present',
-          '摄影｜Before the First Bite',
-          '摄影｜Being Present',
-          '摄影｜Before We Are Defined',
-          '文创｜Campus, Made Tangible',
-          '文创｜Stories to Keep',
-          '结尾｜Closing'
-        ];
+        this.pageConfig = PORTFOLIO_PAGE_BY_NUMBER;
+        this.galleryCounts = new Map(
+          PORTFOLIO_PAGES
+            .filter((page) => page.galleryCount)
+            .map((page) => [page.page, page.galleryCount])
+        );
+        this.processProjects = new Map(
+          PORTFOLIO_PAGES
+            .filter((page) => page.projects.length)
+            .map((page) => [page.page, page.projects])
+        );
+        this.slideTitles = PORTFOLIO_PAGES.map((page) => page.title);
         this.activeOverlay = null;
         this.restoreFocus = null;
         this.galleryState = { slideNumber: 0, itemIndex: 0, count: 0 };
@@ -1777,14 +2279,11 @@
         this.processTitleEn = document.getElementById('processTitleEn');
         this.processTitleZh = document.getElementById('processTitleZh');
         this.processMeta = document.getElementById('processMeta');
+        this.processRole = document.getElementById('processRole');
+        this.processHeaderActions = document.getElementById('processHeaderActions');
         this.processTabs = document.getElementById('processTabs');
+        this.processSectionNav = document.getElementById('processSectionNav');
         this.processBody = document.getElementById('processBody');
-        this.processScope = document.getElementById('processScope');
-        this.processObservation = document.getElementById('processObservation');
-        this.processActions = document.getElementById('processActions');
-        this.processTurningPoint = document.getElementById('processTurningPoint');
-        this.processHarvest = document.getElementById('processHarvest');
-        this.processPoints = document.getElementById('processPoints');
         this.firstVisitHint = document.getElementById('firstVisitHint');
 
         this.buildOverview();
@@ -1932,61 +2431,248 @@
       }
 
       openProcess(slideNumber, projectIndex = 0) {
-        const projects = this.processProjects.get(slideNumber);
-        if (!projects?.length) return;
+        const page = this.pageConfig.get(slideNumber);
+        if (!page?.projects.length) return;
 
-        const normalized = Math.max(0, Math.min(projectIndex, projects.length - 1));
+        const normalized = Math.max(0, Math.min(projectIndex, page.projects.length - 1));
         this.processState = { slideNumber, projectIndex: normalized };
-        this.renderProcessTabs(projects, normalized);
-        this.renderProcessProject(projects[normalized]);
+        this.renderProcessTabs(page, normalized);
+        this.renderProcessProject(page, page.projects[normalized]);
         this.openOverlay(this.processOverlay, this.processTrigger);
         this.processBody.scrollTop = 0;
       }
 
-      renderProcessTabs(projects, currentIndex) {
-        this.processTabs.hidden = projects.length < 2;
+      renderProcessTabs(page, currentIndex) {
+        this.processTabs.hidden = page.projects.length < 2;
         this.processTabs.replaceChildren();
-        if (projects.length < 2) return;
+        if (page.projects.length < 2) return;
 
-        projects.forEach((project, index) => {
+        page.projects.forEach((project, index) => {
           const button = document.createElement('button');
           button.className = 'process-tab';
           button.classList.toggle('current', index === currentIndex);
           button.type = 'button';
           button.setAttribute('aria-selected', String(index === currentIndex));
-          button.textContent = `${project.number} · ${project.titleZh}`;
+          button.textContent = project.tabLabel;
           button.addEventListener('click', () => {
             this.processState.projectIndex = index;
-            this.renderProcessTabs(projects, index);
-            this.renderProcessProject(projects[index]);
+            this.renderProcessTabs(page, index);
+            this.renderProcessProject(page, page.projects[index]);
             this.processBody.scrollTo({ top: 0, behavior: this.reducedMotion ? 'auto' : 'smooth' });
           });
           this.processTabs.append(button);
         });
       }
 
-      renderProcessProject(project) {
-        this.processKicker.textContent = `PROCESS NOTE · ${project.number} / 14`;
+      renderProcessProject(page, project) {
+        const templateClasses = [
+          'template-data-modeling',
+          'template-ai-product',
+          'template-brand-communication',
+          'template-photography-curation'
+        ];
+        this.processDrawer.classList.remove(...templateClasses);
+        this.processDrawer.classList.add(`template-${page.template}`);
+        this.processKicker.textContent = `${page.category} · ${String(page.page).padStart(2, '0')}`;
         this.processTitleEn.textContent = project.titleEn;
         this.processTitleZh.textContent = project.titleZh;
         this.processMeta.textContent = project.meta;
-        this.processScope.textContent = project.scope;
-        this.processObservation.textContent = project.observation;
-        this.processTurningPoint.textContent = project.turningPoint;
-        this.processHarvest.textContent = project.harvest;
+        this.processRole.textContent = project.scope;
+        this.renderProcessHeaderActions(page, project);
+        this.renderProcessBody(page, project);
+        this.renderProcessSectionNav();
+      }
 
-        this.processActions.replaceChildren(...project.actions.map((action) => {
+      renderProcessHeaderActions(page, project) {
+        const actions = [];
+
+        if (project.cta?.href) {
+          const link = document.createElement('a');
+          link.className = 'process-cta primary';
+          link.href = project.cta.href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = project.cta.label;
+          actions.push(link);
+        }
+
+        if (page.galleryCount) {
+          const button = document.createElement('button');
+          button.className = `process-cta${project.cta ? '' : ' primary'}`;
+          button.type = 'button';
+          button.textContent = `查看高清作品 · ${String(page.galleryCount).padStart(2, '0')}`;
+          button.addEventListener('click', () => {
+            this.closeOverlay();
+            this.openGallery(page.page);
+          });
+          actions.push(button);
+        }
+
+        this.processHeaderActions.replaceChildren(...actions);
+      }
+
+      renderProcessBody(page, project) {
+        const makeSection = (id, index, title) => {
+          const section = document.createElement('section');
+          section.className = 'process-section';
+          section.id = id;
+
+          const heading = document.createElement('div');
+          heading.className = 'process-section-head';
+
+          const label = document.createElement('span');
+          label.className = 'process-section-index';
+          label.textContent = index;
+
+          const titleElement = document.createElement('h3');
+          titleElement.className = 'process-section-title';
+          titleElement.textContent = title;
+
+          const content = document.createElement('div');
+          content.className = 'process-section-content';
+          heading.append(label, titleElement);
+          section.append(heading, content);
+          return { section, content };
+        };
+
+        const makePoints = () => {
+          const points = document.createElement('div');
+          points.className = 'process-points';
+          points.replaceChildren(...project.points.map((point) => {
+            const tag = document.createElement('span');
+            tag.className = 'process-point';
+            tag.textContent = point;
+            return tag;
+          }));
+          return points;
+        };
+
+        const overview = makeSection('process-overview', '01 · OVERVIEW', page.templateCopy.overviewTitle);
+        const overviewGrid = document.createElement('div');
+        overviewGrid.className = 'process-overview-grid';
+        const summary = document.createElement('p');
+        summary.className = 'process-summary';
+        summary.textContent = project.observation;
+        const focus = document.createElement('div');
+        focus.className = 'process-scope';
+        const focusLabel = document.createElement('strong');
+        focusLabel.textContent = 'CASE STUDY FOCUS · 核心能力';
+        const focusCopy = document.createElement('span');
+        focusCopy.textContent = project.points.join(' · ');
+        focus.append(focusLabel, focusCopy);
+        overviewGrid.append(summary, focus);
+        overview.content.append(overviewGrid);
+
+        if (project.facts?.length) {
+          const facts = document.createElement('div');
+          facts.className = 'process-facts';
+          facts.replaceChildren(...project.facts.map((fact) => {
+            const item = document.createElement('div');
+            item.className = 'process-fact';
+            const value = document.createElement('span');
+            value.className = 'process-fact-value';
+            value.textContent = fact.value;
+            const label = document.createElement('span');
+            label.className = 'process-fact-label';
+            label.textContent = fact.label;
+            item.append(value, label);
+            return item;
+          }));
+          overview.content.append(facts);
+        }
+        overview.content.append(makePoints());
+
+        const method = makeSection('process-method', '02 · METHOD', page.templateCopy.methodTitle);
+        const methodList = document.createElement('ol');
+        methodList.className = 'process-method-list';
+        methodList.replaceChildren(...project.actions.map((action) => {
           const item = document.createElement('li');
-          item.textContent = action;
+          item.className = 'process-method-card';
+          const copy = document.createElement('p');
+          copy.textContent = action;
+          item.append(copy);
           return item;
         }));
+        method.content.append(methodList);
 
-        this.processPoints.replaceChildren(...project.points.map((point) => {
-          const tag = document.createElement('span');
-          tag.className = 'process-point';
-          tag.textContent = point;
-          return tag;
+        const evidence = makeSection('process-evidence', '03 · EVIDENCE', page.templateCopy.evidenceTitle);
+        const evidenceGrid = document.createElement('div');
+        evidenceGrid.className = 'process-evidence';
+        const evidenceCopy = document.createElement('p');
+        evidenceCopy.className = 'process-evidence-copy';
+        evidenceCopy.textContent = project.harvest;
+        const evidenceList = document.createElement('ul');
+        evidenceList.className = 'process-evidence-list';
+        evidenceList.replaceChildren(...(project.evidence || project.points).map((itemText) => {
+          const item = document.createElement('li');
+          item.textContent = itemText;
+          return item;
         }));
+        evidenceGrid.append(evidenceCopy, evidenceList);
+        evidence.content.append(evidenceGrid);
+
+        const reflection = makeSection('process-reflection', '04 · REFLECTION', page.templateCopy.reflectionTitle);
+        const reflectionCopy = document.createElement('p');
+        reflectionCopy.className = 'process-reflection';
+        reflectionCopy.textContent = project.turningPoint;
+        reflection.content.append(reflectionCopy);
+        if (project.boundary) {
+          const boundary = document.createElement('p');
+          boundary.className = 'process-boundary';
+          const boundaryLabel = document.createElement('strong');
+          boundaryLabel.textContent = 'BOUNDARY · ';
+          boundary.append(boundaryLabel, document.createTextNode(project.boundary));
+          reflection.content.append(boundary);
+        }
+
+        this.processBody.replaceChildren(
+          overview.section,
+          method.section,
+          evidence.section,
+          reflection.section
+        );
+      }
+
+      renderProcessSectionNav() {
+        const sections = [
+          { id: 'process-overview', label: '项目概览' },
+          { id: 'process-method', label: '方法与过程' },
+          { id: 'process-evidence', label: '成果证据' },
+          { id: 'process-reflection', label: '反思与边界' }
+        ];
+
+        const buttons = sections.map((item, index) => {
+          const button = document.createElement('button');
+          button.className = 'process-section-link';
+          button.classList.toggle('current', index === 0);
+          button.type = 'button';
+          button.textContent = item.label;
+          button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+          button.addEventListener('click', () => {
+            const section = document.getElementById(item.id);
+            if (!section) return;
+            this.processBody.scrollTo({
+              top: Math.max(0, section.offsetTop - 12),
+              behavior: this.reducedMotion ? 'auto' : 'smooth'
+            });
+          });
+          return button;
+        });
+
+        this.processSectionNav.replaceChildren(...buttons);
+        this.processBody.onscroll = () => {
+          const threshold = this.processBody.scrollTop + 72;
+          let activeIndex = 0;
+          sections.forEach((item, index) => {
+            const section = document.getElementById(item.id);
+            if (section && section.offsetTop <= threshold) activeIndex = index;
+          });
+          buttons.forEach((button, index) => {
+            const active = index === activeIndex;
+            button.classList.toggle('current', active);
+            button.setAttribute('aria-current', active ? 'true' : 'false');
+          });
+        };
       }
 
       openGallery(slideNumber) {
@@ -2342,8 +3028,8 @@
         this.processTrigger.hidden = !processCount;
         if (processCount) {
           this.processTrigger.textContent = processCount > 1
-            ? `查看过程 · ${String(processCount).padStart(2, '0')}`
-            : '查看过程 · PROCESS';
+            ? `查看案例 · ${String(processCount).padStart(2, '0')}`
+            : '查看案例 · CASE';
         }
       }
 
