@@ -46,10 +46,11 @@
       --paper: #f5eee8;
       --ink: #2d2226;
       --muted: #81777a;
-      --ui-font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-      --display-font: Garamond, Georgia, 'Times New Roman', serif;
-      --sans-font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-      --serif-font: 'Songti SC', SimSun, Georgia, serif;
+      --portfolio-font: Georgia, 'STZhongsong', '华文中宋', serif;
+      --ui-font: var(--portfolio-font);
+      --display-font: var(--portfolio-font);
+      --sans-font: var(--portfolio-font);
+      --serif-font: var(--portfolio-font);
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -69,6 +70,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-synthesis: none;
     }
 
     /* ===========================================
@@ -1332,7 +1334,7 @@
       align-items: center;
       color: #f6f1ec;
       background: #2b0d18;
-      font: 400 21px/1 "Times New Roman", Georgia, serif;
+      font: 400 21px/1 var(--portfolio-font);
       pointer-events: none;
     }
 
@@ -1446,6 +1448,736 @@
       opacity: 0;
       visibility: hidden;
     }
+
+    /* ===========================================
+       APPROVED MIX INTERACTION SYSTEM
+       A: editorial archive shell · B: evidence grid · C: dark gallery
+       Authored PDF pages remain untouched beneath this layer.
+       =========================================== */
+    body,
+    button,
+    a,
+    input {
+      font-family: var(--portfolio-font);
+    }
+
+    .deck-viewport {
+      background: var(--stage-bg);
+    }
+
+    .explore-trigger,
+    .overlay-close,
+    .contact-card,
+    .contact-copy,
+    .first-visit-hint,
+    .help-panel {
+      border-radius: 0;
+    }
+
+    .explore-trigger {
+      min-height: 36px;
+      border-color: rgba(245, 238, 232, 0.32);
+      color: var(--paper);
+      background: rgba(43, 13, 24, 0.9);
+      box-shadow: none;
+      letter-spacing: 0.065em;
+      opacity: 0.82;
+    }
+
+    .explore-trigger:hover,
+    .explore-trigger:focus-visible {
+      background: var(--paper);
+      color: var(--wine);
+    }
+
+    .portfolio-overlay,
+    .contact-overlay {
+      background: rgba(18, 5, 10, 0.975);
+    }
+
+    .overlay-header {
+      left: 40px;
+      right: 40px;
+      top: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(245, 238, 232, 0.22);
+    }
+
+    .overlay-heading small {
+      margin-bottom: 8px;
+      color: rgba(245, 238, 232, 0.58);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+    }
+
+    .overlay-heading h2 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .overlay-close {
+      width: 40px;
+      height: 40px;
+      color: var(--paper);
+      background: transparent;
+    }
+
+    /* A · 档案编辑部：固定酒红页码轨 + 纸张正文 */
+    .process-overlay {
+      background: rgba(17, 5, 9, 0.7);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+    }
+
+    .process-drawer,
+    .process-drawer.template-data-modeling,
+    .process-drawer.template-ai-product,
+    .process-drawer.template-brand-communication,
+    .process-drawer.template-photography-curation {
+      --process-accent: var(--plum);
+      --process-accent-soft: rgba(125, 38, 63, 0.055);
+      width: min(62vw, 1060px);
+      color: var(--ink);
+      background: #f5f0ea;
+      border-left: 1px solid rgba(245, 238, 232, 0.24);
+      box-shadow: -24px 0 76px rgba(13, 2, 7, 0.32);
+      isolation: isolate;
+    }
+
+    .process-drawer::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      z-index: 7;
+      width: 42px;
+      background: var(--wine);
+      pointer-events: none;
+    }
+
+    .process-drawer::after {
+      content: attr(data-folio);
+      position: absolute;
+      left: 13px;
+      top: 28px;
+      z-index: 8;
+      color: rgba(245, 238, 232, 0.82);
+      font: 500 10px/1 var(--portfolio-font);
+      letter-spacing: 0.18em;
+      writing-mode: vertical-rl;
+      pointer-events: none;
+    }
+
+    .process-drawer-header {
+      padding: 38px 82px 28px 72px;
+      border-bottom-color: rgba(59, 13, 27, 0.2);
+      background: rgba(250, 247, 243, 0.98);
+    }
+
+    .process-drawer-header::before { display: none; }
+
+    .process-kicker {
+      gap: 14px;
+      margin-bottom: 14px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.17em;
+    }
+
+    .process-kicker::after {
+      width: 82px;
+      background: rgba(125, 38, 63, 0.48);
+    }
+
+    .process-title-en {
+      max-width: 760px;
+      font-weight: 500;
+      font-size: clamp(34px, 3.1vw, 52px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+    }
+
+    .process-title-zh {
+      margin-top: 10px;
+      font-size: 19px;
+      font-weight: 400;
+      letter-spacing: 0.035em;
+    }
+
+    .process-meta,
+    .process-role,
+    .process-cta,
+    .process-tab,
+    .process-section-link,
+    .process-section-index,
+    .process-fact-label,
+    .process-boundary strong {
+      font-weight: 500;
+    }
+
+    .process-meta { margin-top: 18px; }
+
+    .process-role {
+      max-width: 760px;
+      margin-top: 11px;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .process-close {
+      top: 28px;
+      right: 28px;
+      border-radius: 0;
+      color: var(--wine);
+      background: transparent;
+    }
+
+    .process-header-actions { gap: 0; margin-top: 20px; }
+
+    .process-cta {
+      min-height: 36px;
+      padding: 0 14px;
+      border-color: rgba(125, 38, 63, 0.42);
+      border-radius: 0;
+      background: transparent;
+      letter-spacing: 0.05em;
+    }
+
+    .process-cta + .process-cta { border-left: 0; }
+
+    .process-cta.primary,
+    .process-cta:hover,
+    .process-cta:focus-visible {
+      color: var(--paper);
+      background: var(--wine);
+      transform: none;
+    }
+
+    .process-tabs {
+      gap: 0;
+      padding: 0 28px 0 72px;
+      border-bottom-color: rgba(59, 13, 27, 0.18);
+      background: #eee6df;
+    }
+
+    .process-tab {
+      min-height: 42px;
+      padding: 0 14px;
+      border: 0;
+      border-right: 1px solid rgba(59, 13, 27, 0.16);
+      border-radius: 0;
+      color: #6f6064;
+      letter-spacing: 0.035em;
+    }
+
+    .process-tab:first-child { border-left: 1px solid rgba(59, 13, 27, 0.16); }
+
+    .process-tab.current,
+    .process-tab:hover,
+    .process-tab:focus-visible {
+      color: var(--paper);
+      background: var(--wine);
+    }
+
+    .process-section-nav {
+      gap: 0;
+      padding: 0 28px 0 72px;
+      border-bottom-color: rgba(59, 13, 27, 0.16);
+      background: rgba(250, 247, 243, 0.98);
+    }
+
+    .process-section-link {
+      min-height: 43px;
+      padding: 0 18px;
+      border-left: 1px solid rgba(59, 13, 27, 0.12);
+      color: #6e5e63;
+      letter-spacing: 0.045em;
+    }
+
+    .process-section-link:last-child { border-right: 1px solid rgba(59, 13, 27, 0.12); }
+    .process-section-link::after { height: 3px; }
+
+    .process-body {
+      padding: 0 44px 62px 72px;
+      scrollbar-color: rgba(125, 38, 63, 0.44) transparent;
+    }
+
+    .process-body::-webkit-scrollbar-thumb { border-radius: 0; }
+
+    .process-section {
+      padding: 36px 0 42px;
+      border-bottom-color: rgba(59, 13, 27, 0.17);
+    }
+
+    .process-section-head {
+      grid-template-columns: 126px minmax(0, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .process-section-content { margin-left: 150px; }
+
+    .process-section-index {
+      padding-top: 5px;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+    }
+
+    .process-section-title {
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 30px);
+    }
+
+    /* B · 瑞士证据系统：无圆角、细线、可比较单元 */
+    .process-overview-grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.75fr);
+      gap: 0;
+      border-top: 1px solid rgba(59, 13, 27, 0.26);
+      border-bottom: 1px solid rgba(59, 13, 27, 0.26);
+    }
+
+    .process-summary {
+      padding: 22px 24px 22px 0;
+      font-weight: 400;
+    }
+
+    .process-scope {
+      padding: 22px;
+      border-top: 0;
+      border-left: 1px solid rgba(59, 13, 27, 0.26);
+      background: transparent;
+    }
+
+    .process-facts { gap: 0; margin-top: 0; border-bottom: 1px solid rgba(59, 13, 27, 0.2); }
+
+    .process-fact {
+      min-height: 96px;
+      padding: 18px;
+      border: 0;
+      border-right: 1px solid rgba(59, 13, 27, 0.2);
+      background: transparent;
+    }
+
+    .process-fact:last-child { border-right: 0; }
+
+    .process-fact-value {
+      font-weight: 500;
+      font-size: clamp(20px, 1.8vw, 28px);
+    }
+
+    .process-method-list { gap: 0; border-top: 1px solid rgba(59, 13, 27, 0.22); }
+
+    .process-method-card {
+      min-height: 170px;
+      padding: 52px 20px 22px;
+      border: 0;
+      border-right: 1px solid rgba(59, 13, 27, 0.22);
+      border-bottom: 1px solid rgba(59, 13, 27, 0.22);
+      background: transparent;
+    }
+
+    .process-method-card:first-child { border-left: 1px solid rgba(59, 13, 27, 0.22); }
+
+    .process-evidence { gap: 0; border-top: 1px solid rgba(59, 13, 27, 0.22); }
+
+    .process-evidence-copy {
+      min-height: 100%;
+      padding: 24px;
+      border-left: 0;
+      border-right: 1px solid rgba(59, 13, 27, 0.22);
+      border-bottom: 1px solid rgba(59, 13, 27, 0.22);
+      background: transparent;
+    }
+
+    .process-evidence-list { gap: 0; }
+
+    .process-evidence-list li {
+      padding: 13px 15px;
+      border: 0;
+      border-right: 1px solid rgba(59, 13, 27, 0.22);
+      border-bottom: 1px solid rgba(59, 13, 27, 0.22);
+      background: transparent;
+    }
+
+    .process-reflection {
+      padding: 26px 0;
+      background: transparent;
+    }
+
+    .process-points { gap: 0; margin-top: 22px; }
+
+    .process-point {
+      padding: 8px 11px;
+      border-right: 0;
+      border-radius: 0;
+      background: transparent;
+      font-weight: 500;
+    }
+
+    .process-point:last-child { border-right: 1px solid rgba(125, 38, 63, 0.24); }
+
+    /* CASE DENSITY PASS
+       Keep the selected editorial direction while giving the reading pane
+       materially more vertical space on desktop. */
+    @media (min-width: 721px) {
+      .process-drawer-header {
+        padding: 24px 72px 18px;
+      }
+
+      .process-kicker {
+        margin-bottom: 9px;
+        font-size: 9px;
+      }
+
+      .process-title-en {
+        max-width: 720px;
+        font-size: clamp(30px, 2.25vw, 42px);
+        line-height: 1;
+      }
+
+      .process-title-zh {
+        margin-top: 6px;
+        font-size: 16px;
+        line-height: 1.28;
+      }
+
+      .process-meta {
+        margin-top: 12px;
+        font-size: 9px;
+        line-height: 1.35;
+      }
+
+      .process-role {
+        margin-top: 6px;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .process-header-actions {
+        margin-top: 12px;
+      }
+
+      .process-cta {
+        min-height: 34px;
+      }
+
+      .process-close {
+        top: 20px;
+        right: 22px;
+      }
+
+      .process-tab,
+      .process-section-link {
+        min-height: 39px;
+      }
+
+      .process-section {
+        padding: 28px 0 34px;
+      }
+
+      .process-section-head {
+        margin-bottom: 17px;
+      }
+
+      .process-section-title {
+        font-size: clamp(19px, 1.35vw, 23px);
+        line-height: 1.3;
+      }
+
+      .process-summary {
+        padding: 18px 20px 18px 0;
+        font-size: clamp(15px, 1.05vw, 18px);
+        line-height: 1.72;
+      }
+
+      .process-scope {
+        padding: 18px;
+        font-size: 10px;
+      }
+
+      .process-fact {
+        min-height: 82px;
+        padding: 15px;
+      }
+
+      .process-fact-value {
+        font-size: clamp(18px, 1.35vw, 24px);
+      }
+
+      .process-method-card {
+        min-height: 148px;
+        padding: 46px 17px 18px;
+      }
+
+      .process-evidence-copy {
+        padding: 20px;
+        font-size: 14px;
+        line-height: 1.72;
+      }
+
+      .process-reflection {
+        padding: 22px 0;
+        font-size: 15px;
+        line-height: 1.75;
+      }
+    }
+
+    /* C · 暗场展览：作品分组只在完整画廊出现 */
+    #galleryOverlay { background: #100508; }
+
+    #galleryOverlay .overlay-header {
+      left: 28px;
+      right: 28px;
+      top: 22px;
+    }
+
+    .gallery-layout {
+      inset: 96px 28px 24px;
+      grid-template-columns: 176px minmax(0, 1fr) 190px;
+      gap: 0;
+      border-top: 1px solid rgba(245, 238, 232, 0.14);
+      border-bottom: 1px solid rgba(245, 238, 232, 0.14);
+    }
+
+    .gallery-layout.single-group {
+      grid-template-columns: minmax(0, 1fr) 190px;
+    }
+
+    .gallery-groups {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 20px 16px 20px 0;
+      border-right: 1px solid rgba(245, 238, 232, 0.14);
+    }
+
+    .gallery-groups[hidden] { display: none; }
+
+    .gallery-group-label {
+      margin-bottom: 16px;
+      color: rgba(245, 238, 232, 0.46);
+      font: 500 9px/1 var(--portfolio-font);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .gallery-group-button {
+      width: 100%;
+      padding: 13px 10px;
+      border: 0;
+      border-top: 1px solid rgba(245, 238, 232, 0.14);
+      color: rgba(245, 238, 232, 0.62);
+      background: transparent;
+      font: 400 12px/1.45 var(--portfolio-font);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .gallery-group-button:last-child { border-bottom: 1px solid rgba(245, 238, 232, 0.14); }
+
+    .gallery-group-button.current,
+    .gallery-group-button:hover,
+    .gallery-group-button:focus-visible {
+      color: var(--wine);
+      background: var(--paper);
+      outline: none;
+    }
+
+    .gallery-stage {
+      border: 0;
+      background: #090306;
+    }
+
+    .gallery-main-image {
+      max-width: 94%;
+      max-height: 91%;
+      filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.34));
+    }
+
+    .gallery-arrow {
+      width: 42px;
+      height: 58px;
+      border: 1px solid rgba(245, 238, 232, 0.14);
+      background: rgba(16, 5, 8, 0.78);
+    }
+
+    .gallery-zoom-hint,
+    .gallery-zoom-controls {
+      border-radius: 0;
+      background: rgba(16, 5, 8, 0.82);
+    }
+
+    .gallery-thumbnails {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 0 0 12px;
+      border-left: 1px solid rgba(245, 238, 232, 0.14);
+    }
+
+    .gallery-thumb {
+      border: 0;
+      border-bottom: 1px solid rgba(245, 238, 232, 0.11);
+      background: transparent;
+      opacity: 0.46;
+    }
+
+    .gallery-thumb:hover,
+    .gallery-thumb:focus-visible,
+    .gallery-thumb.current {
+      border-color: rgba(245, 238, 232, 0.72);
+      background: rgba(245, 238, 232, 0.08);
+    }
+
+    .gallery-thumb img { aspect-ratio: 16 / 10; }
+
+    .gallery-counter {
+      padding: 8px 10px;
+      border-top: 1px solid rgba(245, 238, 232, 0.18);
+      background: rgba(16, 5, 8, 0.7);
+    }
+
+    /* 纵向手机阅读：PDF 预览在上，正文与入口在下 */
+    .mobile-reading-panel { display: none; }
+
+    @media (max-width: 720px) and (orientation: portrait) {
+      .deck-viewport { background: #17090e; }
+
+      .edge-nav {
+        top: 54px;
+        bottom: auto;
+        height: max(80px, calc(var(--mobile-preview-bottom, 286px) - 54px));
+      }
+
+      .explore-actions .process-trigger,
+      .explore-actions .gallery-trigger { display: none !important; }
+
+      .mobile-reading-panel {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        top: calc(var(--mobile-preview-bottom, 286px) + 10px);
+        bottom: max(10px, env(safe-area-inset-bottom));
+        z-index: 850;
+        display: block;
+        overflow-y: auto;
+        padding: 20px 18px 24px;
+        color: var(--ink);
+        background: #f5f0ea;
+        border-top: 4px solid var(--plum);
+        box-shadow: 0 -12px 34px rgba(11, 2, 5, 0.22);
+        overscroll-behavior: contain;
+      }
+
+      .mobile-reading-folio {
+        color: var(--plum);
+        font: 500 9px/1 var(--portfolio-font);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .mobile-reading-title {
+        margin-top: 10px;
+        color: var(--wine);
+        font: 500 clamp(25px, 8vw, 36px)/1.05 var(--portfolio-font);
+        letter-spacing: -0.025em;
+      }
+
+      .mobile-reading-summary {
+        margin-top: 14px;
+        color: #4c3c41;
+        font: 400 14px/1.72 var(--portfolio-font);
+      }
+
+      .mobile-reading-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+        border-top: 1px solid rgba(59, 13, 27, 0.24);
+        border-left: 1px solid rgba(59, 13, 27, 0.24);
+      }
+
+      .mobile-reading-action {
+        min-height: 46px;
+        padding: 8px 10px;
+        border: 0;
+        border-right: 1px solid rgba(59, 13, 27, 0.24);
+        border-bottom: 1px solid rgba(59, 13, 27, 0.24);
+        color: var(--wine);
+        background: transparent;
+        font: 500 11px/1.3 var(--portfolio-font);
+        cursor: pointer;
+      }
+
+      .mobile-reading-action:hover,
+      .mobile-reading-action:focus-visible {
+        color: var(--paper);
+        background: var(--wine);
+        outline: none;
+      }
+
+      .mobile-reading-action[hidden] { display: none; }
+
+      .gallery-layout,
+      .gallery-layout.single-group {
+        inset: 82px 12px 12px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        border-bottom: 0;
+      }
+
+      .gallery-layout.single-group { grid-template-rows: minmax(0, 1fr); }
+
+      .gallery-groups {
+        flex-direction: row;
+        gap: 0;
+        overflow-x: auto;
+        padding: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(245, 238, 232, 0.14);
+        scrollbar-width: none;
+      }
+
+      .gallery-groups::-webkit-scrollbar { display: none; }
+      .gallery-group-label { display: none; }
+
+      .gallery-group-button {
+        flex: 0 0 auto;
+        width: auto;
+        min-height: 42px;
+        padding: 0 13px;
+        border-top: 0;
+        border-right: 1px solid rgba(245, 238, 232, 0.14);
+        white-space: nowrap;
+      }
+
+      .gallery-group-button:last-child { border-bottom: 0; }
+      .gallery-main-image { max-width: 95%; max-height: 91%; }
+
+      .process-drawer,
+      .process-drawer.template-data-modeling,
+      .process-drawer.template-ai-product,
+      .process-drawer.template-brand-communication,
+      .process-drawer.template-photography-curation { width: 100%; }
+
+      .process-drawer::before { width: 30px; }
+      .process-drawer::after { left: 9px; top: 22px; font-size: 8px; }
+      .process-drawer-header { padding: 26px 58px 22px 48px; }
+      .process-title-en { font-size: clamp(29px, 9vw, 40px); }
+      .process-tabs { padding-left: 48px; }
+      .process-section-nav { padding-left: 48px; }
+      .process-body { padding: 0 20px 44px 48px; }
+      .process-section-head { grid-template-columns: 1fr; gap: 7px; }
+      .process-section-content { margin-left: 0; }
+      .process-overview-grid { grid-template-columns: 1fr; }
+      .process-scope { border-left: 0; border-top: 1px solid rgba(59, 13, 27, 0.22); }
+      .process-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-fact:nth-child(2n) { border-right: 0; }
+      .process-method-list,
+      .template-brand-communication .process-method-list,
+      .template-photography-curation .process-method-list { grid-template-columns: 1fr; }
+      .process-method-card { min-height: 0; border-left: 1px solid rgba(59, 13, 27, 0.22); }
+      .process-evidence { grid-template-columns: 1fr; }
+      .process-evidence-copy { border-right: 1px solid rgba(59, 13, 27, 0.22); }
+    }
   </style>
 </head>
 <body>
@@ -1525,6 +2257,18 @@
     </main>
   </div>
 
+  <section class="mobile-reading-panel" id="mobileReadingPanel" aria-live="polite">
+    <p class="mobile-reading-folio" id="mobileReadingFolio"></p>
+    <h2 class="mobile-reading-title" id="mobileReadingTitle"></h2>
+    <p class="mobile-reading-summary" id="mobileReadingSummary"></p>
+    <div class="mobile-reading-actions">
+      <button class="mobile-reading-action" id="mobileProcessButton" type="button" hidden>案例档案 · CASE</button>
+      <button class="mobile-reading-action" id="mobileGalleryButton" type="button" hidden>完整作品 · GALLERY</button>
+      <button class="mobile-reading-action" id="mobileContactButton" type="button">联系 · CONTACT</button>
+      <button class="mobile-reading-action" id="mobileIndexButton" type="button">目录 · INDEX</button>
+    </div>
+  </section>
+
   <button class="edge-nav prev" id="edgePrev" aria-label="上一页"></button>
   <button class="edge-nav next" id="edgeNext" aria-label="下一页"></button>
 
@@ -1577,6 +2321,7 @@
       <button class="overlay-close" type="button" data-close-overlay aria-label="关闭高清作品">×</button>
     </header>
     <div class="gallery-layout">
+      <nav class="gallery-groups" id="galleryGroups" aria-label="作品分组" hidden></nav>
       <div class="gallery-stage" id="galleryStage">
         <img class="gallery-main-image" id="galleryMainImage" alt="" decoding="async">
         <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="上一件作品">‹</button>
@@ -2133,22 +2878,34 @@
       }]]
     ]);
 
+    const GALLERY_GROUPS_BY_PAGE = new Map([
+      [8, [
+        { label: '01 视频生产 · Moving Image', items: [0, 1, 2, 3, 4] },
+        { label: '02 视觉传达 · Visual Communication', items: [5, 6, 7, 14, 15] },
+        { label: '03 路演展示 · Presentation Design', items: [8, 9, 10, 11, 12, 13] }
+      ]],
+      [15, [
+        { label: '13 爱在小贸 · Love at UIBE', items: [0, 1, 2, 3, 10, 11, 12] },
+        { label: '14 一封信 · A Letter', items: [4, 5, 6, 7, 8, 9] }
+      ]]
+    ]);
+
     const PORTFOLIO_PAGE_BASE = [
       { page: 1, title: '封面｜Cover' },
-      { page: 2, title: '关于我｜About' },
-      { page: 3, title: '数理｜Modeling Hidden Votes', galleryCount: 4 },
-      { page: 4, title: '机器学习｜Credit Card Eligibility', galleryCount: 3 },
-      { page: 5, title: 'AI｜Cut Away the Bad Luck', galleryCount: 4 },
-      { page: 6, title: 'AI｜PaperPrism', galleryCount: 2 },
-      { page: 7, title: '风颂牧影｜Fengsong Muying', galleryCount: 7 },
-      { page: 8, title: '创作｜Creative Practice', galleryCount: 16 },
-      { page: 9, title: '新媒体｜Public Narratives', galleryCount: 14 },
-      { page: 10, title: '策展｜Present', galleryCount: 8 },
-      { page: 11, title: '摄影｜Before the First Bite', galleryCount: 9 },
-      { page: 12, title: '摄影｜Being Present', galleryCount: 11 },
-      { page: 13, title: '摄影｜Before We Are Defined', galleryCount: 9 },
-      { page: 14, title: '文创｜Campus, Made Tangible', galleryCount: 9 },
-      { page: 15, title: '文创｜Stories to Keep', galleryCount: 13 },
+      { page: 2, displayNumber: '01', title: '关于我｜About' },
+      { page: 3, displayNumber: '02', title: '数理｜Modeling Hidden Votes', galleryCount: 4 },
+      { page: 4, displayNumber: '03', title: '机器学习｜Credit Card Eligibility', galleryCount: 3 },
+      { page: 5, displayNumber: '04', title: 'AI｜Cut Away the Bad Luck', galleryCount: 4 },
+      { page: 6, displayNumber: '05', title: 'AI｜PaperPrism', galleryCount: 2 },
+      { page: 7, displayNumber: '06', title: '风颂牧影｜Fengsong Muying', galleryCount: 7 },
+      { page: 8, displayNumber: '07', title: '创作｜Creative Practice', galleryCount: 16 },
+      { page: 9, displayNumber: '08', title: '新媒体｜Public Narratives', galleryCount: 14 },
+      { page: 10, displayNumber: '09', title: '策展｜Present', galleryCount: 8 },
+      { page: 11, displayNumber: '10', title: '摄影｜Before the First Bite', galleryCount: 9 },
+      { page: 12, displayNumber: '11', title: '摄影｜Being Present', galleryCount: 11 },
+      { page: 13, displayNumber: '12', title: '摄影｜Before We Are Defined', galleryCount: 9 },
+      { page: 14, displayNumber: '13', title: '文创｜Campus, Made Tangible', galleryCount: 9 },
+      { page: 15, displayNumber: '14', title: '文创｜Stories to Keep', galleryCount: 13 },
       { page: 16, title: '结尾｜Closing' }
     ];
 
@@ -2166,6 +2923,7 @@
         ...basePage,
         ...pageMeta,
         projects,
+        galleryGroups: GALLERY_GROUPS_BY_PAGE.get(basePage.page) || null,
         templateCopy: pageMeta ? CASE_STUDY_TEMPLATES[pageMeta.template] : null
       };
     });
@@ -2206,7 +2964,14 @@
         this.slideTitles = PORTFOLIO_PAGES.map((page) => page.title);
         this.activeOverlay = null;
         this.restoreFocus = null;
-        this.galleryState = { slideNumber: 0, itemIndex: 0, count: 0 };
+        this.galleryState = {
+          slideNumber: 0,
+          itemIndex: 0,
+          count: 0,
+          groupIndex: 0,
+          groups: [],
+          visibleItems: []
+        };
         this.processState = { slideNumber: 0, projectIndex: 0 };
         this.galleryView = {
           scale: 1,
@@ -2270,6 +3035,7 @@
         this.overviewGrid = document.getElementById('overviewGrid');
         this.galleryStage = document.getElementById('galleryStage');
         this.galleryMainImage = document.getElementById('galleryMainImage');
+        this.galleryGroups = document.getElementById('galleryGroups');
         this.galleryThumbnails = document.getElementById('galleryThumbnails');
         this.galleryCounter = document.getElementById('galleryCounter');
         this.galleryTitle = document.getElementById('galleryTitle');
@@ -2285,6 +3051,12 @@
         this.processSectionNav = document.getElementById('processSectionNav');
         this.processBody = document.getElementById('processBody');
         this.firstVisitHint = document.getElementById('firstVisitHint');
+        this.mobileReadingPanel = document.getElementById('mobileReadingPanel');
+        this.mobileReadingFolio = document.getElementById('mobileReadingFolio');
+        this.mobileReadingTitle = document.getElementById('mobileReadingTitle');
+        this.mobileReadingSummary = document.getElementById('mobileReadingSummary');
+        this.mobileProcessButton = document.getElementById('mobileProcessButton');
+        this.mobileGalleryButton = document.getElementById('mobileGalleryButton');
 
         this.buildOverview();
         this.indexTrigger.addEventListener('click', () => this.openOverview());
@@ -2292,6 +3064,10 @@
         document.getElementById('endContactHotspot')?.addEventListener('click', (event) => this.openContact(event.currentTarget));
         this.processTrigger.addEventListener('click', () => this.openProcess(this.currentSlide + 1));
         this.galleryTrigger.addEventListener('click', () => this.openGallery(this.currentSlide + 1));
+        this.mobileProcessButton.addEventListener('click', () => this.openProcess(this.currentSlide + 1));
+        this.mobileGalleryButton.addEventListener('click', () => this.openGallery(this.currentSlide + 1));
+        document.getElementById('mobileContactButton').addEventListener('click', () => this.openContact());
+        document.getElementById('mobileIndexButton').addEventListener('click', () => this.openOverview());
         this.contactOverlay.querySelectorAll('.contact-copy[data-copy]').forEach((button) => {
           button.addEventListener('click', () => this.copyContact(button));
         });
@@ -2473,7 +3249,11 @@
         ];
         this.processDrawer.classList.remove(...templateClasses);
         this.processDrawer.classList.add(`template-${page.template}`);
-        this.processKicker.textContent = `${page.category} · ${String(page.page).padStart(2, '0')}`;
+        const baseCaseNumber = page.projects.find((item) => item.number)?.number || page.displayNumber;
+        const caseNumber = project.number
+          || `${baseCaseNumber}.${this.processState.projectIndex + 1}`;
+        this.processDrawer.dataset.folio = `PDF PAGE · ${page.displayNumber || String(page.page).padStart(2, '0')}`;
+        this.processKicker.textContent = `${page.category} · CASE ${caseNumber} / PDF PAGE ${page.displayNumber || '--'}`;
         this.processTitleEn.textContent = project.titleEn;
         this.processTitleZh.textContent = project.titleZh;
         this.processMeta.textContent = project.meta;
@@ -2503,7 +3283,10 @@
           button.textContent = `查看高清作品 · ${String(page.galleryCount).padStart(2, '0')}`;
           button.addEventListener('click', () => {
             this.closeOverlay();
-            this.openGallery(page.page);
+            const groupIndex = page.galleryGroups
+              ? Math.min(this.processState.projectIndex, page.galleryGroups.length - 1)
+              : 0;
+            this.openGallery(page.page, groupIndex);
           });
           actions.push(button);
         }
@@ -2675,32 +3458,83 @@
         };
       }
 
-      openGallery(slideNumber) {
-        const count = this.galleryCounts.get(slideNumber);
+      openGallery(slideNumber, initialGroupIndex = 0) {
+        const page = this.pageConfig.get(slideNumber);
+        const count = page?.galleryCount;
         if (!count) return;
 
-        this.galleryState = { slideNumber, itemIndex: 0, count };
+        const allItems = Array.from({ length: count }, (_, index) => index);
+        const groups = page.galleryGroups || [{ label: 'ALL WORKS · 全部作品', items: allItems }];
+        const groupIndex = Math.max(0, Math.min(initialGroupIndex, groups.length - 1));
+        this.galleryState = {
+          slideNumber,
+          itemIndex: groups[groupIndex].items[0] || 0,
+          count,
+          groupIndex,
+          groups,
+          visibleItems: [...groups[groupIndex].items]
+        };
         this.galleryTitle.textContent = this.slideTitles[slideNumber - 1];
-        this.galleryThumbnails.replaceChildren();
+        this.renderGalleryGroups();
+        this.openOverlay(this.galleryOverlay, this.galleryTrigger);
+        this.selectGalleryGroup(groupIndex, false);
+      }
 
-        for (let index = 0; index < count; index += 1) {
+      renderGalleryGroups() {
+        const { groups } = this.galleryState;
+        this.galleryGroups.hidden = groups.length < 2;
+        this.galleryGroups.closest('.gallery-layout')?.classList.toggle('single-group', groups.length < 2);
+        const label = document.createElement('span');
+        label.className = 'gallery-group-label';
+        label.textContent = 'CHAPTERS · 作品分组';
+
+        const buttons = groups.map((group, index) => {
+          const button = document.createElement('button');
+          button.className = 'gallery-group-button';
+          button.classList.toggle('current', index === this.galleryState.groupIndex);
+          button.type = 'button';
+          button.dataset.groupIndex = String(index);
+          button.textContent = `${group.label} · ${String(group.items.length).padStart(2, '0')}`;
+          button.setAttribute('aria-current', index === this.galleryState.groupIndex ? 'true' : 'false');
+          button.addEventListener('click', () => this.selectGalleryGroup(index));
+          return button;
+        });
+
+        this.galleryGroups.replaceChildren(label, ...buttons);
+      }
+
+      selectGalleryGroup(groupIndex, focusImage = true) {
+        const { groups } = this.galleryState;
+        const normalized = Math.max(0, Math.min(groupIndex, groups.length - 1));
+        const group = groups[normalized];
+        this.galleryState.groupIndex = normalized;
+        this.galleryState.visibleItems = [...group.items];
+
+        this.galleryGroups.querySelectorAll('.gallery-group-button').forEach((button) => {
+          const current = Number(button.dataset.groupIndex) === normalized;
+          button.classList.toggle('current', current);
+          button.setAttribute('aria-current', current ? 'true' : 'false');
+        });
+
+        this.galleryThumbnails.replaceChildren();
+        group.items.forEach((itemIndex, groupItemIndex) => {
           const button = document.createElement('button');
           button.className = 'gallery-thumb';
           button.type = 'button';
-          button.dataset.itemIndex = String(index);
-          button.setAttribute('aria-label', `查看作品 ${index + 1}`);
+          button.dataset.itemIndex = String(itemIndex);
+          button.setAttribute('aria-label', `${group.label}，作品 ${groupItemIndex + 1}`);
 
           const image = document.createElement('img');
-          image.src = this.galleryAssetPath(slideNumber, index, true);
+          image.src = this.galleryAssetPath(this.galleryState.slideNumber, itemIndex, true);
           image.alt = '';
           image.loading = 'lazy';
           button.append(image);
-          button.addEventListener('click', () => this.setGalleryItem(index));
+          button.addEventListener('click', () => this.setGalleryItem(itemIndex));
           this.galleryThumbnails.append(button);
-        }
+        });
 
-        this.openOverlay(this.galleryOverlay, this.galleryTrigger);
-        this.setGalleryItem(0, false);
+        this.setGalleryItem(group.items[0], false);
+        if (focusImage) this.galleryStage.focus?.({ preventScroll: true });
       }
 
       galleryAssetPath(slideNumber, itemIndex, thumbnail = false) {
@@ -2710,9 +3544,11 @@
       }
 
       setGalleryItem(itemIndex, scrollThumbnail = true) {
-        const { slideNumber, count } = this.galleryState;
+        const { slideNumber, count, visibleItems, groups, groupIndex } = this.galleryState;
         if (!count) return;
-        const normalized = (itemIndex + count) % count;
+        const normalized = visibleItems.includes(itemIndex)
+          ? itemIndex
+          : visibleItems[0];
         this.galleryState.itemIndex = normalized;
         this.resetGalleryView(false);
         this.galleryStage.classList.add('loading');
@@ -2725,7 +3561,9 @@
         this.galleryMainImage.onerror = () => this.galleryStage.classList.remove('loading');
         this.galleryMainImage.src = this.galleryAssetPath(slideNumber, normalized);
         this.galleryMainImage.alt = `${this.slideTitles[slideNumber - 1]}，作品 ${normalized + 1}`;
-        this.galleryCounter.textContent = `${String(normalized + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
+        const groupPosition = visibleItems.indexOf(normalized) + 1;
+        const group = groups[groupIndex];
+        this.galleryCounter.textContent = `${group.label} · ${String(groupPosition).padStart(2, '0')} / ${String(visibleItems.length).padStart(2, '0')} · ALL ${String(normalized + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
 
         this.galleryThumbnails.querySelectorAll('.gallery-thumb').forEach((button) => {
           button.classList.toggle('current', Number(button.dataset.itemIndex) === normalized);
@@ -2737,8 +3575,9 @@
           });
         }
 
+        const currentVisibleIndex = visibleItems.indexOf(normalized);
         [-1, 1].forEach((offset) => {
-          const preloadIndex = (normalized + offset + count) % count;
+          const preloadIndex = visibleItems[(currentVisibleIndex + offset + visibleItems.length) % visibleItems.length];
           const preload = new Image();
           preload.src = this.galleryAssetPath(slideNumber, preloadIndex);
         });
@@ -2956,7 +3795,10 @@
 
       moveGallery(direction) {
         if (this.activeOverlay !== this.galleryOverlay) return;
-        this.setGalleryItem(this.galleryState.itemIndex + direction);
+        const { visibleItems, itemIndex } = this.galleryState;
+        const current = Math.max(0, visibleItems.indexOf(itemIndex));
+        const next = (current + direction + visibleItems.length) % visibleItems.length;
+        this.setGalleryItem(visibleItems[next]);
       }
 
       openOverlay(overlay, trigger) {
@@ -3033,13 +3875,48 @@
         }
       }
 
+      updateMobileReading(index) {
+        const page = this.pageConfig.get(index + 1);
+        const slide = this.slides[index];
+        const heading = slide.querySelector('.sr-only h1, .sr-only h2');
+        const summary = slide.querySelector('.sr-only p');
+        const pageLabel = page.displayNumber
+          ? `PDF PAGE ${page.displayNumber} · WEB ${String(page.page).padStart(2, '0')} / 16`
+          : `${page.page === 1 ? 'COVER' : 'CLOSING'} · WEB ${String(page.page).padStart(2, '0')} / 16`;
+
+        this.mobileReadingFolio.textContent = pageLabel;
+        this.mobileReadingTitle.textContent = heading?.textContent || page.title;
+        this.mobileReadingSummary.textContent = summary?.textContent || '';
+
+        const processCount = page.projects.length;
+        this.mobileProcessButton.hidden = !processCount;
+        if (processCount) {
+          this.mobileProcessButton.textContent = processCount > 1
+            ? `案例档案 · ${String(processCount).padStart(2, '0')}`
+            : '案例档案 · CASE';
+        }
+
+        this.mobileGalleryButton.hidden = !page.galleryCount;
+        if (page.galleryCount) {
+          this.mobileGalleryButton.textContent = `完整作品 · ${String(page.galleryCount).padStart(2, '0')}`;
+        }
+        this.mobileReadingPanel.scrollTop = 0;
+      }
+
       setupStageScale() {
         const scaleStage = () => {
-          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const mobileReading = window.matchMedia('(max-width: 720px) and (orientation: portrait)').matches;
+          const factor = mobileReading
+            ? window.innerWidth / 1920
+            : Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
           this.stageScale = factor;
-          const x = (window.innerWidth - 1920 * factor) / 2;
-          const y = (window.innerHeight - 1080 * factor) / 2;
+          const x = mobileReading ? 0 : (window.innerWidth - 1920 * factor) / 2;
+          const y = mobileReading ? 54 : (window.innerHeight - 1080 * factor) / 2;
           this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+          document.documentElement.style.setProperty(
+            '--mobile-preview-bottom',
+            `${Math.round(y + 1080 * factor)}px`
+          );
         };
         scaleStage();
         window.addEventListener('resize', scaleStage, { passive: true });
@@ -3370,6 +4247,7 @@
       updateChrome(index, updateHash) {
         document.title = `${String(index + 1).padStart(2, '0')} ${this.slideTitles[index]} · Stella’s Portfolio 2026`;
         this.updateExploreControls(index);
+        this.updateMobileReading(index);
 
         if (updateHash) {
           history.replaceState(null, '', `#slide=${index + 1}`);
@@ -3461,11 +4339,16 @@
 
       initializeImages() {
         const loading = document.getElementById('loading');
-        this.prefetchAround(this.currentSlide);
         this.ensureSlideLoaded(this.currentSlide, true)
           .catch(() => {})
           .finally(() => {
             loading.classList.add('done');
+            const deferPrefetch = () => this.prefetchAround(this.currentSlide);
+            if ('requestIdleCallback' in window) {
+              window.requestIdleCallback(deferPrefetch, { timeout: 900 });
+            } else {
+              window.setTimeout(deferPrefetch, 180);
+            }
           });
 
         window.setTimeout(() => loading.classList.add('done'), 3000);
